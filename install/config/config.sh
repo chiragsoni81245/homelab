@@ -10,11 +10,11 @@ mkdir -p ~/.local/share/applications
 sudo mkdir -p /etc/gnupg
 sudo cp ~/.local/share/homelab/default/gpg/dirmngr.conf /etc/gnupg/
 sudo chmod 644 /etc/gnupg/dirmngr.conf
-sudo gpgconf --kill dirmngr || true
-sudo gpgconf --launch dirmngr || true
+gpgconf --kill dirmngr || true
+gpgconf --launch dirmngr || true
 
 # disable effect of laptop lid switch on power
-sudo sed -i 's|^#(HandleLidSwitch|HandleLidSwitchExternalPower|HandleLidSwitchDocked)=\w+|\1=ignore|' "/etc/systemd/logind.conf"
+sudo sed -i 's/^#(HandleLidSwitch|HandleLidSwitchExternalPower|HandleLidSwitchDocked)=\w+/$1=ignore/' "/etc/systemd/logind.conf"
 
 # Set common git aliases
 git config --global init.defaultBranch main
