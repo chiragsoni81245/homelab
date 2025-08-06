@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Copy over Homelab configs
-cp -R ~/.local/share/homelab/config/* ~/.config/
-
 # Use default bashrc from Homelab
 cp ~/.local/share/homelab/default/bashrc ~/.bashrc
 
