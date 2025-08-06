@@ -3,6 +3,7 @@
 # Exit immediately if a command exits with a non-zero status
 set -e
 
+export PATH="$HOME/.local/bin:$PATH"
 HOMELAB_INSTALL=~/.local/share/homelab/install
 
 # Give people a chance to retry running the installation
