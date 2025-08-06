@@ -10,7 +10,7 @@ echo -e "\n$ansi_art\n"
 
 sudo apt update
 sudo apt upgrade -y
-sudo apt install git -y
+sudo apt install git curl pipx -y
 
 # Use custom repo if specified, otherwise default to chiragsoni81245/homelab
 HOMELAB_REPO="${HOMELAB_REPO:-chiragsoni81245/homelab}"
