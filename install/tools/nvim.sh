@@ -14,4 +14,5 @@ if ! command -v nvim &>/dev/null; then
   # Using my personal nvim configurations
   git clone https://github.com/chiragsoni81245/nvim.git ~/.config/nvim
   rm -rf ~/.config/nvim/.git
+  /opt/nvim/bin/nvim --headless +"so ~/.config/nvim/lua/jarvis/packer.lua" +PackerSync +qa
 fi
