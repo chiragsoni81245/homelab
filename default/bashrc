@@ -3,7 +3,7 @@
 source ~/.local/share/homelab/default/bash/rc
 
 # Add your own exports, aliases, and functions here.
-source ~/.local/share/homelab/default/bash/homelab_autocomplete
+source ~/.local/share/homelab/bin/homelab_autocomplete
 
 export HOMELAB_CONFIG=~/.local/share/homelab/config.yaml
 export PATH="$PATH:/opt/nvim/bin"
