@@ -5,3 +5,4 @@ applications:
   plex-server: true
   portainer: true
   transmission: true 
+  vscode: true
