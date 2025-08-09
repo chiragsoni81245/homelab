@@ -1,0 +1,7 @@
+profile:
+  username: chirag
+  email: chiragsoni81245@gmail.com
+applications:
+  plex-server: true
+  portainer: true
+  transmission: true 

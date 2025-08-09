@@ -1,0 +1,25 @@
+#!/bin/bash
+
+COMPOSE_BASE_DIR="~/.local/share/homelab/applications"
+
+# Loop through each application in config
+yq -r '.applications | to_entries[] | "\(.key) \(.value)"' "$CONFIG_FILE" | while read -r app status; do
+    compose_file="$COMPOSE_BASE_DIR/$app.yaml"
+
+    # Skip if compose file not found
+    if [[ ! -f "$compose_file" ]]; then
+        echo "!!! Compose file for $app not found, skipping."
+        continue
+    fi
+
+    if [[ "$status" == "true" ]]; then
+        echo ">>> Enabling: $app"
+        docker compose -f "$compose_file" up -d
+        echo "*** Enabled: $app"
+    else
+        echo ">>> Disabling: $app"
+        docker compose -f "$compose_file" down
+        echo "*** Disabled: $app"
+    fi
+done
+

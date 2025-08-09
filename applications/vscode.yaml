@@ -1,0 +1,30 @@
+name: vscode
+
+networks:
+  vscode_net:
+    driver: bridge
+
+services:
+  vscode:
+    environment:
+      - PASSWORD=itscptime
+      - PORT=8080
+    hostname: vscode
+    image: chiragsoni812/self-hosted-vscode:latest
+    labels:
+      icon: https://code.visualstudio.com/assets/images/code-stable.png
+    ports:
+      - target: 8080
+        published: "8088"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/Documents/Chirag/Competitive Programming/Code
+        target: /root/code
+      - type: bind
+        source: /DATA/Documents/Chirag/second-brain
+        target: /root/second-brain
+    networks:
+      - vscode_net
+    privileged: false

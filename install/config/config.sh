@@ -21,9 +21,9 @@ git config --global init.defaultBranch main
 
 # Set identification from install inputs
 if [[ -n "${HOMELAB_USER_NAME//[[:space:]]/}" ]]; then
-  git config --global user.name "$HOMELAB_USER_NAME"
+  git config --global user.name "$(yq '.profile.username' "$HOMELAB_CONFIG")"
 fi
 
 if [[ -n "${HOMELAB_USER_EMAIL//[[:space:]]/}" ]]; then
-  git config --global user.email "$HOMELAB_USER_EMAIL"
+  git config --global user.email "$(yq '.profile.email' "$HOMELAB_CONFIG")"
 fi

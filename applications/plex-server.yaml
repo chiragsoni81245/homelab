@@ -1,0 +1,39 @@
+name: plex-server
+
+networks:
+  plex_net:
+    driver: bridge
+
+services:
+  plex-server:
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Kolkata
+      - VERSION=docker
+    image: lscr.io/linuxserver/plex:latest
+    labels:
+      icon: https://www.plex.tv/wp-content/themes/plex/assets/img/plex-logo.svg
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/plex/config
+        target: /config
+      - type: bind
+        source: /DATA/AppData/plex/transcode
+        target: /transcode
+      - type: bind
+        source: /DATA/Media
+        target: /data
+    ports:
+      - "32400:32400"    # Plex Web UI / Remote Access
+      - "1900:1900/udp"  # SSDP Discovery (LAN only)
+      - "32469:32469"    # DLNA (LAN only)
+      - "32410:32410/udp" # GDM discovery (LAN only)
+      - "32412:32412/udp"
+      - "32413:32413/udp"
+      - "32414:32414/udp"
+    networks:
+      - plex_net
+    privileged: false
+    hostname: "plex-server"

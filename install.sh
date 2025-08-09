@@ -4,6 +4,7 @@
 set -e
 
 export PATH="$HOME/.local/bin:$PATH"
+export HOMELAB_CONFIG=~/.local/share/homelab/config.yaml
 HOMELAB_INSTALL=~/.local/share/homelab/install
 
 # Give people a chance to retry running the installation
@@ -30,14 +31,13 @@ source $HOMELAB_INSTALL/preflight/presentation.sh
 
 # Configuration
 show_logo beams 240
-show_subtext "Let's install Homelab! [1/5]"
-source $HOMELAB_INSTALL/config/identification.sh
+show_subtext "Let's install Homelab! [1/4]"
 source $HOMELAB_INSTALL/config/config.sh
 source $HOMELAB_INSTALL/config/timezones.sh
 
 # Development
 show_logo decrypt 920
-show_subtext "Installing terminal tools [2/5]"
+show_subtext "Installing terminal tools [2/4]"
 source $HOMELAB_INSTALL/tools/terminal.sh
 source $HOMELAB_INSTALL/tools/nvim.sh
 source $HOMELAB_INSTALL/tools/tmux.sh
@@ -45,9 +45,14 @@ source $HOMELAB_INSTALL/tools/yt-dlp.sh
 source $HOMELAB_INSTALL/tools/docker.sh
 source $HOMELAB_INSTALL/tools/samba.sh
 
+# Applications
+show_logo beams 240
+show_subtext "Installing applications via docker [3/4]"
+source $HOMELAB_INSTALL/applications/manage.sh
+
 # Updates
 show_logo highlight
-show_subtext "Updating system packages [5/5]"
+show_subtext "Updating system packages [4/4]"
 sudo apt update
 sudo apt upgrade -y
 

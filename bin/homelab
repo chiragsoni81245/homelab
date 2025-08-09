@@ -20,11 +20,15 @@ Commands:
   update
     Pulls the latest changes from git in $HOMELAB_DIR
 
+  application
+    update   # update the applications based on config 
+
   nvim
     update   # Pulls latest config from git and runs PackerSync
 
 Examples:
   $0 update
+  $0 application update
   $0 nvim update
 EOF
     exit 1
@@ -42,6 +46,14 @@ update() {
     fi
     echo -e "${GREEN}[UPDATE]${NC} Pulling latest changes in $HOMELAB_DIR..."
     git -C "$HOMELAB_DIR" pull origin main --ff-only
+}
+
+# ====== Application Functions ======
+update_applications() {
+    update
+
+    echo -e "${GREEN}[UPDATE]${NC} applying latest changes in on applications based on $HOMELAB_CONFIG"
+    sudo bash ~/.local/share/homelab/install/applications/manage
 }
 
 # ====== NVIM FUNCTIONS ======
@@ -64,6 +76,15 @@ shift || true
 case "$main_cmd" in
     update)
         update
+        ;;
+    application)
+        [[ $# -lt 1 ]] && error "Missing application subcommand"
+        sub_cmd="$1"
+        shift || true
+        case "$sub_cmd" in
+            update) update_applications ;;
+            *) error "Unknown application subcommand: $sub_cmd" ;;
+        esac
         ;;
     nvim)
         [[ $# -lt 1 ]] && error "Missing nvim subcommand"

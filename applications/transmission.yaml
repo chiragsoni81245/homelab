@@ -1,0 +1,43 @@
+name: transmission
+
+networks:
+  transmission_net:
+    driver: bridge
+
+services:
+  transmission:
+    environment:
+      - PASS=Unit8-Unzip7-Derived4-Overtake6
+      - PEERPORT=51413
+      - PGID=1000
+      - PUID=1000
+      - TRANSMISSION_RPC_AUTHENTICATION_REQUIRED=false
+      - TZ=Asia/Kolkata
+    hostname: transmission
+    image: linuxserver/transmission:4.0.4
+    labels:
+      icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Transmission/icon.png
+    ports:
+      - target: 9091
+        published: "9091"
+        protocol: tcp
+      - target: 51413
+        published: "51413"
+        protocol: tcp
+      - target: 51413
+        published: "51413"
+        protocol: UDP
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/transmission/config
+        target: /config
+      - type: bind
+        source: /DATA/Downloads/Torrent
+        target: /downloads
+      - type: bind
+        source: /DATA/Downloads/Torrent/watch
+        target: /watch
+    networks:
+      - transmission_net
+    privileged: false

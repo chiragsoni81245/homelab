@@ -1,0 +1,33 @@
+name: portainer
+
+networks:
+  portainer_net:
+    driver: bridge
+
+services:
+  portainer:
+    hostname: portainer
+    image: portainer/portainer-ce:2.21.1
+    labels:
+      icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Portainer/icon.png
+    ports:
+      - target: 8000
+        published: "8000"
+        protocol: tcp
+      - target: 9000
+        published: "9000"
+        protocol: tcp
+      - target: 9443
+        published: "9443"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/portainer
+        target: /data
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+    networks:
+      - portainer_net
+    privileged: false

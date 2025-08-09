@@ -3,7 +3,9 @@
 source ~/.local/share/homelab/default/bash/rc
 
 # Add your own exports, aliases, and functions here.
+source ~/.local/share/homelab/default/bash/homelab_autocomplete
 
+export HOMELAB_CONFIG=~/.local/share/homelab/config.yaml
 export PATH="$PATH:/opt/nvim/bin"
 alias vim="nvim"
 bind '"\C-f": "~/.local/share/homelab/bin/tmux-sessionizer\n"'
