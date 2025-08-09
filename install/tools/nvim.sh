@@ -18,6 +18,5 @@ if ! command -v nvim &>/dev/null; then
   if [ ! -f "$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim" ]; then
     git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
   fi
-  /opt/nvim/bin/nvim --headless +PackerInstall +qa
-  /opt/nvim/bin/nvim --headless +"so ~/.config/nvim/lua/jarvis/packer.lua" +PackerSync +qa
+  /opt/nvim/bin/nvim --headless -c 'so ~/.config/nvim/lua/jarvis/packer.lua' -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 fi
