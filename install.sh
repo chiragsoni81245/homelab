@@ -5,7 +5,7 @@ set -e
 
 export PATH="$HOME/.local/bin:$PATH"
 
-if [ ! -f "~/.local/share/homelab/config.yaml" ]; then
+if [ -f "~/.local/share/homelab/config.yaml" ]; then
     export HOMELAB_CONFIG=~/.local/share/homelab/config.yaml
 else
     export HOMELAB_CONFIG=~/.local/share/homelab/default-config.yaml
