@@ -5,3 +5,5 @@ sudo apt install -y \
   fzf ripgrep jq \
   wl-clipboard htop \
   man tldr less whois plocate bash-completion
+
+sudo snap install yq
