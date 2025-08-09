@@ -1,7 +1,7 @@
 #!/bin/bash
 
 sudo apt install -y \
-  wget unzip tar inetutils-tools \
+  wget unzip tar inetutils-tools net-tools \
   fzf ripgrep jq \
   wl-clipboard htop \
   man tldr less whois plocate bash-completion
