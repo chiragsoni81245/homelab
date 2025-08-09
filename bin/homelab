@@ -1,0 +1,81 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# ===== CONFIG =====
+HOMELAB_DIR="$HOME/.local/share/homelab"
+NVIM_CONFIG_DIR="$HOME/.config/nvim"         # For nvim update-config
+
+# ===== COLORS =====
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m'
+
+# ===== FUNCTIONS =====
+usage() {
+    cat <<EOF
+Usage: $0 <command> [subcommand] [options]
+
+Commands:
+  update
+    Pulls the latest changes from git in $HOMELAB_DIR
+
+  nvim
+    update   # Pulls latest config from git and runs PackerSync
+
+Examples:
+  $0 update
+  $0 nvim update
+EOF
+    exit 1
+}
+
+error() {
+    echo -e "${RED}Error:${NC} $*" >&2
+    usage
+}
+
+# ====== HOMELAB UPDATE FUNCTION ======
+update() {
+    if [[ ! -d "$HOMELAB_DIR/.git" ]]; then
+        error "No git repo found in $HOMELAB_DIR"
+    fi
+    echo -e "${GREEN}[UPDATE]${NC} Pulling latest changes in $HOMELAB_DIR..."
+    git -C "$HOMELAB_DIR" pull origin main --ff-only
+}
+
+# ====== NVIM FUNCTIONS ======
+nvim_update_config() {
+    if [[ ! -d "$NVIM_CONFIG_DIR/.git" ]]; then
+        error "No git repo found in $NVIM_CONFIG_DIR"
+    fi
+    echo -e "${GREEN}[NVIM]${NC} Pulling latest config from $NVIM_CONFIG_DIR..."
+    git -C "$NVIM_CONFIG_DIR" pull origin main --ff-only
+}
+
+# ====== MAIN SCRIPT ======
+if [[ $# -lt 1 ]]; then
+    usage
+fi
+
+main_cmd="$1"
+shift || true
+
+case "$main_cmd" in
+    update)
+        update
+        ;;
+    nvim)
+        [[ $# -lt 1 ]] && error "Missing nvim subcommand"
+        sub_cmd="$1"
+        shift || true
+        case "$sub_cmd" in
+            update) nvim_update_config ;;
+            *) error "Unknown nvim subcommand: $sub_cmd" ;;
+        esac
+        ;;
+    *)
+        error "Unknown main command: $main_cmd"
+        ;;
+esac
+

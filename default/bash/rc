@@ -4,4 +4,5 @@ source ~/.local/share/homelab/default/bash/functions
 source ~/.local/share/homelab/default/bash/prompt
 source ~/.local/share/homelab/default/bash/init
 source ~/.local/share/homelab/default/bash/envs
+source ~/.local/share/homelab/default/bash/homelab_autocomplete
 [[ $- == *i* ]] && bind -f ~/.local/share/homelab/default/bash/inputrc

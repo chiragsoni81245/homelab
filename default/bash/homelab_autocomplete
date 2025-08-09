@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+_mytool_completions() {
+    local cur prev words cword
+    _init_completion || return
+
+    # Top-level commands
+    local commands="update nvim"
+
+    # Nvim subcommands
+    local nvim_sub="update-config"
+
+    case "${COMP_WORDS[1]}" in
+        nvim)
+            COMPREPLY=( $(compgen -W "$nvim_sub" -- "$cur") )
+            ;;
+        *)
+            COMPREPLY=( $(compgen -W "$commands" -- "$cur") )
+            ;;
+    esac
+}
+
+# Register the completion for your script (change to your actual script name)
+complete -F _mytool_completions ~/.local/share/homelab/bin/homelab
+
