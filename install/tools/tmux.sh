@@ -2,7 +2,8 @@
 
 sudo apt install tmux -y
 
-cd
-git clone --single-branch https://github.com/gpakosz/.tmux.git
-ln -s -f .tmux/.tmux.conf
-cp .tmux/.tmux.conf.local .
+if [ ! -d "$HOME/.tmux" ]; then
+    git clone --single-branch https://github.com/gpakosz/.tmux.git "$HOME/.tmux"
+    ln -s -f "$HOME/.tmux/.tmux.conf"
+    cp "$HOME/.tmux/.tmux.conf.local" .
+fi
