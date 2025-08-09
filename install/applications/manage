@@ -1,6 +1,6 @@
 #!/bin/bash
 
-COMPOSE_BASE_DIR="~/.local/share/homelab/applications"
+COMPOSE_BASE_DIR="$HOME/.local/share/homelab/applications"
 
 # Loop through each application in config
 yq -r '.applications | to_entries[] | "\(.key) \(.value)"' "$HOMELAB_CONFIG" | while read -r app status; do
@@ -14,11 +14,11 @@ yq -r '.applications | to_entries[] | "\(.key) \(.value)"' "$HOMELAB_CONFIG" | w
 
     if [[ "$status" == "true" ]]; then
         echo ">>> Enabling: $app"
-        docker compose -f "$compose_file" up -d
+        sudo docker compose -f "$compose_file" up -d
         echo "*** Enabled: $app"
     else
         echo ">>> Disabling: $app"
-        docker compose -f "$compose_file" down
+        sudo docker compose -f "$compose_file" down
         echo "*** Disabled: $app"
     fi
 done
