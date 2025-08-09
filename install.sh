@@ -48,7 +48,7 @@ source $HOMELAB_INSTALL/tools/samba.sh
 # Applications
 show_logo beams 240
 show_subtext "Installing applications via docker [3/4]"
-source $HOMELAB_INSTALL/applications/manage.sh
+source $HOMELAB_INSTALL/applications/manage
 
 # Updates
 show_logo highlight
