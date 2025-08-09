@@ -11,3 +11,4 @@ alias vim="nvim"
 bind '"\C-f": "~/.local/share/homelab/bin/tmux-sessionizer\n"'
 
 alias yt-dlp-pl='yt-dlp -f b -o "%(playlist_index)s - %(title)s.%(ext)s" --playlist-items 1- '
+alias docker="sudo docker"
