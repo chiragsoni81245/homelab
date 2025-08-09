@@ -43,6 +43,7 @@ source $HOMELAB_INSTALL/tools/nvim.sh
 source $HOMELAB_INSTALL/tools/tmux.sh
 source $HOMELAB_INSTALL/tools/yt-dlp.sh
 source $HOMELAB_INSTALL/tools/docker.sh
+source $HOMELAB_INSTALL/tools/samba.sh
 
 # Updates
 show_logo highlight
