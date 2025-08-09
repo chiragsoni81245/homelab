@@ -9,6 +9,7 @@ ansi_art="
 clear
 echo -e "\n$ansi_art\n"
 
+export DEBIAN_FRONTEN=noninteractive 
 sudo apt update
 sudo apt upgrade -y
 sudo apt install git curl pipx -y
