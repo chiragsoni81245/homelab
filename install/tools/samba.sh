@@ -8,7 +8,7 @@ fi
 
 if [ ! -d '/etc/samba/share.conf' ]; then
     # Copy Samba configurations
-    sudo mv /etc/samba/smb.conf /etc/samba/default_smb.conf
+    sudo cp /etc/samba/smb.conf /etc/samba/default_smb.conf
     sudo cp -r ~/.local/share/homelab/config/samba/* /etc/samba/
 fi
 
