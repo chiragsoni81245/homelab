@@ -14,7 +14,7 @@ gpgconf --kill dirmngr || true
 gpgconf --launch dirmngr || true
 
 # disable effect of laptop lid switch on power
-sudo sed -i 's/^#(HandleLidSwitch|HandleLidSwitchExternalPower|HandleLidSwitchDocked)=\w+/$1=ignore/' "/etc/systemd/logind.conf"
+sudo sed -i 's/^#\(HandleLidSwitch\|HandleLidSwitchExternalPower\|HandleLidSwitchDocked\)=\w*/\1=ignore/' "/etc/systemd/logind.conf"
 
 # Set common git aliases
 git config --global init.defaultBranch main
