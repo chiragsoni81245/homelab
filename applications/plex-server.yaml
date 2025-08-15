@@ -11,6 +11,7 @@ services:
       - PGID=1000
       - TZ=Asia/Kolkata
       - VERSION=docker
+      - PLEX_CLAIM={{ plex_claim }}
     image: lscr.io/linuxserver/plex:latest
     labels:
       icon: https://www.plex.tv/wp-content/themes/plex/assets/img/plex-logo.svg

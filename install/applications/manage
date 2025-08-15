@@ -6,7 +6,14 @@ COMPOSE_BASE_DIR="$HOME/.local/share/homelab/applications"
 yq -r '.applications | to_entries[] | "\(.key) \(.value.enable)"' "$HOMELAB_CONFIG" | \
 while read -r app enable_status; do
     compose_template="$COMPOSE_BASE_DIR/$app.yaml"
-    compose_file="$COMPOSE_BASE_DIR/$app.yaml"
+
+    RENDERED_APPLICATIONS_DIR="$COMPOSE_BASE_DIR/.current"
+    if [ ! -d "$COMPOSE_BASE_DIR/.current" ]; then
+        mkdir $RENDERED_APPLICATIONS_DIR
+    fi
+    compose_file="$RENDERED_APPLICATIONS_DIR/$app.yaml"
+
+
 
     # Skip if template file not found
     if [[ ! -f "$compose_template" ]]; then
