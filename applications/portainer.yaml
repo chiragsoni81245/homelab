@@ -22,9 +22,11 @@ services:
         protocol: tcp
     restart: unless-stopped
     volumes:
+      {{ if .config_path }}
       - type: bind
-        source: /DATA/AppData/portainer
+        source: {{ .config_path }}
         target: /data
+      {{ end }}
       - type: bind
         source: /var/run/docker.sock
         target: /var/run/docker.sock

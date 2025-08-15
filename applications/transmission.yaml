@@ -29,15 +29,21 @@ services:
         protocol: UDP
     restart: unless-stopped
     volumes:
+      {{ if .config_path }}
       - type: bind
-        source: /DATA/AppData/transmission/config
+        source: {{ .config_path }}
         target: /config
+      {{ end }}
+      {{ if .downloads_path }}
       - type: bind
-        source: /DATA/Downloads/Torrent
+        source: {{ .downloads_path }}
         target: /downloads
+      {{ end }}
+      {{ if .watch_path }}
       - type: bind
-        source: /DATA/Downloads/Torrent/watch
+        source: {{ .watch_path }}
         target: /watch
+      {{ end }}
     networks:
       - transmission_net
     privileged: false

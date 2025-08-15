@@ -17,15 +17,21 @@ services:
       icon: https://www.plex.tv/wp-content/themes/plex/assets/img/plex-logo.svg
     restart: unless-stopped
     volumes:
+      {{ if .config_path }}
       - type: bind
-        source: /DATA/AppData/plex/config
+        source: {{ .config_path }}
         target: /config
+      {{ end }}
+      {{ if .transcode_path }}
       - type: bind
-        source: /DATA/AppData/plex/transcode
+        source: {{ .transcode_path }}
         target: /transcode
+      {{ end }}
+      {{ if .media_path }}
       - type: bind
-        source: /DATA/Media
+        source: {{ .media_path }}
         target: /data
+      {{ end }}
     ports:
       - "32400:32400"    # Plex Web UI / Remote Access
       - "1900:1900/udp"  # SSDP Discovery (LAN only)

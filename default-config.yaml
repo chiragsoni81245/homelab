@@ -1,16 +1,30 @@
 profile:
-  username: chirag
-  email: chiragsoni81245@gmail.com
+  username: "default"
+  email: "" 
+
 applications:
   plex-server: 
     enable: true
+    plex_claim: "<plex-claim>"
+    config_path: "/DATA/AppData/plex/config"
+    transcode_path: "/DATA/AppData/plex/transcode"
+    media_path: "/DATA/Media"
+
   portainer: 
     enable: true
+    config_path: "/DATA/AppData/portainer"
+
   transmission: 
     enable: true
-    username: test
-    password: test101
+    username: admin
+    password: default-password 
+    config_path: "/DATA/AppData/transmission/config"
+    downloads_path: "/DATA/Downloads/Torrent"
+    watch_path: "/DATA/Downloads/Torrent/watch"
+
   vscode:
     enable: true
-    password: test101
-
+    password: default-password
+    directories:
+      - name: "data"
+        path: "/DATA/"

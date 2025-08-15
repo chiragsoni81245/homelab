@@ -19,12 +19,11 @@ services:
         protocol: tcp
     restart: unless-stopped
     volumes:
+      {{ range $i, $v := .directories }}
       - type: bind
-        source: /DATA/Documents/Chirag/Competitive Programming/Code
-        target: /root/code
-      - type: bind
-        source: /DATA/Documents/Chirag/second-brain
-        target: /root/second-brain
+        source: {{ $v.path }} 
+        target: /root/{{ $v.name }}
+      {{ end }}
     networks:
       - vscode_net
     privileged: false
