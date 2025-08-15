@@ -7,12 +7,11 @@ networks:
 services:
   transmission:
     environment:
-      - PASS=Unit8-Unzip7-Derived4-Overtake6
       - PEERPORT=51413
       - PGID=1000
       - PUID=1000
-      - USER={{ username }}
-      - PASS={{ password }}
+      - USER={{ .username }}
+      - PASS={{ .password }}
       - TZ=Asia/Kolkata
     hostname: transmission
     image: linuxserver/transmission:4.0.4

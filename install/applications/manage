@@ -28,8 +28,8 @@ while read -r app enable_status; do
         cp "$compose_template" "$compose_file"
 
         # Rendering compose files from the go template engine
-        APP_CONFIGURATIONS=$(yq -r ".applications[\"$app\"]" "$HOMELAB_CONFIG")
-        tpl -f $compose_template -d yaml < $APP_CONFIGURATION > $compose_file
+        APP_CONFIGURATIONS=$(yq -o json ".applications[\"$app\"]" "$HOMELAB_CONFIG")
+        echo $APP_CONFIGURATIONS | tpl -f $compose_template > $compose_file
 
         sudo docker compose -f "$compose_file" up -d
         echo "*** Enabled: $app"

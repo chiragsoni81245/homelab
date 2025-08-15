@@ -7,7 +7,7 @@ networks:
 services:
   vscode:
     environment:
-      - PASSWORD={{ password }}
+      - PASSWORD={{ .password }}
       - PORT=8080
     hostname: vscode
     image: chiragsoni812/self-hosted-vscode:latest
