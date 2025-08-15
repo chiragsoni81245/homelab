@@ -16,3 +16,9 @@ if [ ! -f '/usr/local/bin/sync-tool' ]; then
   sudo wget https://github.com/chiragsoni81245/sync-tool/releases/download/v1.1.0/sync-tool -O /usr/local/bin/sync-tool
   sudo chmod +x /usr/local/bin/sync-tool
 fi
+
+# tpl for rendering go templates
+if [ ! -f '/usr/local/bin/tpl' ]; then
+    sudo curl -fsSL https://github.com/bluebrown/go-template-cli/releases/latest/download/tpl-linux-amd64 -o /usr/local/bin/tpl
+    sudo chmod 755 /usr/local/bin/tpl
+fi

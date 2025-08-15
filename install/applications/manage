@@ -27,13 +27,9 @@ while read -r app enable_status; do
         # Copy template to target file
         cp "$compose_template" "$compose_file"
 
-        # Replace {{ variable }} in the file with values from YAML
-        APP_CONFIGURATIONS=$(yq -r ".applications[\"$app\"] | to_entries[] | select(.key != \"enable\") | \"\(.key)=\(.value)\"" "$HOMELAB_CONFIG")
-        while IFS="=" read -r key value; do
-            # Escape forward slashes in value to avoid sed errors
-            safe_value=$(printf '%s' "$value" | sed 's/[&/\]/\\&/g')
-            sed -i "s/{{[[:space:]]*$key[[:space:]]*}}/$safe_value/g" "$compose_file"
-        done <<< "$APP_CONFIGURATIONS"
+        # Rendering compose files from the go template engine
+        APP_CONFIGURATIONS=$(yq -r ".applications[\"$app\"]" "$HOMELAB_CONFIG")
+        tpl -f $compose_template -d yaml < $APP_CONFIGURATION > $compose_file
 
         sudo docker compose -f "$compose_file" up -d
         echo "*** Enabled: $app"
