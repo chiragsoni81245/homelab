@@ -3,17 +3,31 @@
 COMPOSE_BASE_DIR="$HOME/.local/share/homelab/applications"
 
 # Loop through each application in config
-yq -r '.applications | to_entries[] | "\(.key) \(.value)"' "$HOMELAB_CONFIG" | while read -r app status; do
+yq -r '.applications | to_entries[] | "\(.key) \(.value.enable)"' "$HOMELAB_CONFIG" | \
+while read -r app enable_status; do
+    compose_template="$COMPOSE_BASE_DIR/$app.template.yaml"
     compose_file="$COMPOSE_BASE_DIR/$app.yaml"
 
-    # Skip if compose file not found
-    if [[ ! -f "$compose_file" ]]; then
-        echo "!!! Compose file for $app not found, skipping."
+    # Skip if template file not found
+    if [[ ! -f "$compose_template" ]]; then
+        echo "!!! Template file for $app not found, skipping."
         continue
     fi
 
-    if [[ "$status" == "true" ]]; then
+    if [[ "$enable_status" == "true" ]]; then
         echo ">>> Enabling: $app"
+
+        # Copy template to target file
+        cp "$compose_template" "$compose_file"
+
+        # Replace {{ variable }} in the file with values from YAML
+        APP_CONFIGURATIONS=(yq -r ".applications[\"$app\"] | to_entries[] | select(.key != \"enable\") | \"\(.key)=\(.value)\"" "$HOMELAB_CONFIG")
+        while IFS="=" read -r key value; do
+            # Escape forward slashes in value to avoid sed errors
+            safe_value=$(printf '%s' "$value" | sed 's/[&/\]/\\&/g')
+            sed -i "s/{{[[:space:]]*$key[[:space:]]*}}/$safe_value/g" "$compose_file"
+        done < <$APP_CONFIGURATIONS
+
         sudo docker compose -f "$compose_file" up -d
         echo "*** Enabled: $app"
     else
@@ -22,4 +36,3 @@ yq -r '.applications | to_entries[] | "\(.key) \(.value)"' "$HOMELAB_CONFIG" | w
         echo "*** Disabled: $app"
     fi
 done
-

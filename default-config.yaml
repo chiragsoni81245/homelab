@@ -2,7 +2,16 @@ profile:
   username: chirag
   email: chiragsoni81245@gmail.com
 applications:
-  plex-server: true
-  portainer: true
-  transmission: true 
-  vscode: true
+  plex-server: 
+    enable: true
+  portainer: 
+    enable: true
+    password: test101 
+  transmission: 
+    enable: true
+    username: test
+    password: test101
+  vscode:
+    enable: true
+    password: test101
+

@@ -11,7 +11,8 @@ services:
       - PEERPORT=51413
       - PGID=1000
       - PUID=1000
-      - TRANSMISSION_RPC_AUTHENTICATION_REQUIRED=false
+      - USER={{ username }}
+      - PASS={{ password }}
       - TZ=Asia/Kolkata
     hostname: transmission
     image: linuxserver/transmission:4.0.4
