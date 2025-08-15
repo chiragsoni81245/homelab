@@ -6,7 +6,6 @@ applications:
     enable: true
   portainer: 
     enable: true
-    password: test101 
   transmission: 
     enable: true
     username: test
