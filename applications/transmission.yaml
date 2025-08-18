@@ -16,7 +16,6 @@ services:
     hostname: transmission
     image: linuxserver/transmission:4.0.4
     labels:
-    labels:
       x-homelab: "ture"
       x-homelab-name: "portainer"
       x-homelab-web-url: "{{ .base_url }}:9091/"

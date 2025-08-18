@@ -12,7 +12,6 @@ services:
     hostname: vscode
     image: chiragsoni812/self-hosted-vscode:latest
     labels:
-    labels:
       x-homelab: "ture"
       x-homelab-name: "portainer"
       x-homelab-web-url: "{{ .base_url }}:8088/"

@@ -9,7 +9,6 @@ services:
     hostname: portainer
     image: portainer/portainer-ce:2.21.1
     labels:
-    labels:
       x-homelab: "ture"
       x-homelab-name: "portainer"
       x-homelab-web-url: "{{ .base_url }}:9000/"
