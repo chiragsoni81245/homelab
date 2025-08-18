@@ -12,7 +12,7 @@ services:
       - TZ=Asia/Kolkata
       - VERSION=docker
       - PLEX_CLAIM={{ .plex_claim }}
-    image: lscr.io/linuxserver/plex:1.41.3
+    image: lscr.io/linuxserver/plex:latest
     labels:
       - "x-homelab=true"
       - "x-homelab-index=0"
