@@ -3,8 +3,16 @@ profile:
   email: "" 
 
 applications:
+  homelab-dashboard:
+    enable: true
+    username: admin
+    password: default-password
+    secret_key: default-secret
+    data_path: "/DATA/AppData/homelab-dashboard/data"
+
   plex-server: 
     enable: true
+    base_url: "http://192.168.0.160"
     plex_claim: "<plex-claim>"
     config_path: "/DATA/AppData/plex/config"
     transcode_path: "/DATA/AppData/plex/transcode"
@@ -12,10 +20,12 @@ applications:
 
   portainer: 
     enable: true
+    base_url: "http://192.168.0.160"
     config_path: "/DATA/AppData/portainer"
 
   transmission: 
     enable: true
+    base_url: "http://192.168.0.160"
     username: admin
     password: default-password 
     config_path: "/DATA/AppData/transmission/config"
@@ -24,6 +34,7 @@ applications:
 
   vscode:
     enable: true
+    base_url: "http://192.168.0.160"
     password: default-password
     directories:
       - name: "data"
