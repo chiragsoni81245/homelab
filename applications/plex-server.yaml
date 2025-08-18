@@ -14,10 +14,10 @@ services:
       - PLEX_CLAIM={{ .plex_claim }}
     image: lscr.io/linuxserver/plex:latest
     labels:
-      x-homelab: "ture"
-      x-homelab-name: "plex"
-      x-homelab-web-url: "{{ .base_url }}:32400/"
-      x-homelab-icon: https://www.plex.tv/wp-content/themes/plex/assets/img/plex-logo.svg
+      - "x-homelab:ture"
+      - "x-homelab-name=plex"
+      - "x-homelab-web-url={{ .base_url }}:32400/"
+      - "x-homelab-icon=https://www.plex.tv/wp-content/themes/plex/assets/img/plex-logo.svg"
     restart: unless-stopped
     volumes:
       {{ if .config_path }}

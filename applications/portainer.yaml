@@ -9,10 +9,10 @@ services:
     hostname: portainer
     image: portainer/portainer-ce:2.21.1
     labels:
-      x-homelab: "ture"
-      x-homelab-name: "portainer"
-      x-homelab-web-url: "{{ .base_url }}:9000/"
-      x-homelab-icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Portainer/icon.png
+      - "x-homelab=ture"
+      - "x-homelab-name=portainer"
+      - "x-homelab-web-url={{ .base_url }}:9000/"
+      - "x-homelab-icon=https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Portainer/icon.png"
     ports:
       - target: 8000
         published: "8000"
