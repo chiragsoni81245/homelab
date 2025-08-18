@@ -13,7 +13,7 @@ services:
     image: chiragsoni812/self-hosted-vscode:latest
     labels:
       - "x-homelab=true"
-      - "x-homelab-name=portainer"
+      - "x-homelab-name=vscode"
       - "x-homelab-web-url={{ .base_url }}:8088/"
       - "x-homelab-icon=https://code.visualstudio.com/assets/images/code-stable.png"
     ports:
