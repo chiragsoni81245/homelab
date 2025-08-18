@@ -16,7 +16,7 @@ services:
     hostname: transmission
     image: linuxserver/transmission:4.0.4
     labels:
-      - "x-homelab=ture"
+      - "x-homelab=true"
       - "x-homelab-name=portainer"
       - "x-homelab-web-url={{ .base_url }}:9091/"
       - "x-homelab-icon=https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Transmission/icon.png"
