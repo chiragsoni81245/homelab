@@ -49,6 +49,7 @@ source $HOMELAB_INSTALL/tools/tmux.sh
 source $HOMELAB_INSTALL/tools/yt-dlp.sh
 source $HOMELAB_INSTALL/tools/docker.sh
 source $HOMELAB_INSTALL/tools/samba.sh
+source $HOMELAB_INSTALL/tools/sync-tool.sh
 
 # Applications
 show_logo beams 240

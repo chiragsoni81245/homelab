@@ -2,6 +2,14 @@ profile:
   username: "default"
   email: "" 
 
+# ------------- Uncomment this if you want to use sync-tool -------------
+# sync-tool:
+#   cron_schedule: ""
+#   github_username: "default"
+#   github_token: "<your-github-token-with-right-permissions>"
+#   github_email: "<your-email>"
+#   google_drive_credentials_filepath: "<path-to-google-drive-credentials-file>"
+
 samba:
   shares:
     - name: "Media"
