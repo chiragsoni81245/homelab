@@ -29,6 +29,9 @@ Commands:
   samba
     update   # Update samba config and shares
 
+  config
+    open the homelab config into nvim editor
+
 Examples:
   $0 update
   $0 application update
@@ -77,6 +80,11 @@ samba_configuration_update() {
     bash ~/.local/share/homelab/install/tools/samba.sh
 }
 
+# ===== Open Homelab configuration =====
+open_homelab_config() {
+    nvim "$HOMELAB_DIR/config.yaml"
+}
+
 # ====== MAIN SCRIPT ======
 if [[ $# -lt 1 ]]; then
     usage
@@ -88,6 +96,9 @@ shift || true
 case "$main_cmd" in
     update)
         update
+        ;;
+    config)
+        open_homelab_config
         ;;
     application)
         [[ $# -lt 1 ]] && error "Missing application subcommand"

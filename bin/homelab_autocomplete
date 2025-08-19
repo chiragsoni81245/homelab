@@ -5,7 +5,7 @@ _mytool_completions() {
     _init_completion || return
 
     # Top-level commands
-    local commands="update application nvim samba"
+    local commands="update config application nvim samba"
 
     # Nvim subcommands
     local nvim_sub="update"
