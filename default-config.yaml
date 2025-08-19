@@ -10,6 +10,7 @@ samba:
       group: smbmedia
       browseable: "yes"
       writable: "no"
+      guest: "no"
 
 applications:
   homelab-dashboard:
