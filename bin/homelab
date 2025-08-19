@@ -71,6 +71,9 @@ nvim_update_config() {
 
 # ===== Samba Configuration Update =====
 samba_configuration_update() {
+    update
+
+    echo -e "${GREEN}[UPDATE]${NC} updating latest samba configuration based on $HOMELAB_CONFIG"
     bash ~/.local/share/homelab/install/tools/samba.sh
 }
 
