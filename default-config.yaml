@@ -5,6 +5,7 @@ profile:
 # ------------- Uncomment this if you want to use sync-tool -------------
 # sync-tool:
 #   cron_schedule: ""
+#   database_filepath: "/etc/sync-tool/data.db"
 #   github_username: "default"
 #   github_token: "<your-github-token-with-right-permissions>"
 #   github_email: "<your-email>"
