@@ -5,7 +5,7 @@ _mytool_completions() {
     _init_completion || return
 
     # Top-level commands
-    local commands="update application nvim"
+    local commands="update application nvim samba"
 
     # Nvim subcommands
     local nvim_sub="update"
@@ -13,12 +13,18 @@ _mytool_completions() {
     # Application subcommands
     local application_sub="update"
 
+    # Samba subcommand
+    local samba_sub="update"
+
     case "${COMP_WORDS[1]}" in
         application)
             COMPREPLY=( $(compgen -W "$application_sub" -- "$cur") )
             ;;
         nvim)
             COMPREPLY=( $(compgen -W "$nvim_sub" -- "$cur") )
+            ;;
+        samba)
+            COMPREPLY=( $(compgen -W "$samba_sub" -- "$cur") )
             ;;
         *)
             COMPREPLY=( $(compgen -W "$commands" -- "$cur") )

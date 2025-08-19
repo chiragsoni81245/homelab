@@ -26,10 +26,14 @@ Commands:
   nvim
     update   # Pulls latest config from git and runs PackerSync
 
+  samba
+    update   # Update samba config and shares
+
 Examples:
   $0 update
   $0 application update
   $0 nvim update
+  $0 samba update
 EOF
     exit 1
 }
@@ -65,6 +69,11 @@ nvim_update_config() {
     git -C "$NVIM_CONFIG_DIR" pull origin main --ff-only
 }
 
+# ===== Samba Configuration Update =====
+samba_configuration_update() {
+    bash ~/.local/share/homelab/install/tools/samba.sh
+}
+
 # ====== MAIN SCRIPT ======
 if [[ $# -lt 1 ]]; then
     usage
@@ -93,6 +102,15 @@ case "$main_cmd" in
         case "$sub_cmd" in
             update) nvim_update_config ;;
             *) error "Unknown nvim subcommand: $sub_cmd" ;;
+        esac
+        ;;
+    samba)
+        [[ $# -lt 1 ]] && error "Missing samba subcommand"
+        sub_cmd="$1"
+        shift || true
+        case "$sub_cmd" in
+            update) samba_configuration_update ;;
+            *) error "Unknown samba subcommand: $sub_cmd" ;;
         esac
         ;;
     *)
