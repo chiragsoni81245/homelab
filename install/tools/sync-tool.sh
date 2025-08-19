@@ -4,7 +4,7 @@ VERSION="v1.1.0"
 
 # Install sync-tool
 if [ ! -f '/usr/local/bin/sync-tool' ]; then
-  sudo wget -q "https://github.com/chiragsoni81245/sync-tool/releases/download/$VERSION/sync-tool" -O /usr/local/bin/sync-tool
+  sudo wget "https://github.com/chiragsoni81245/sync-tool/releases/download/$VERSION/sync-tool" -O /usr/local/bin/sync-tool
   sudo chmod +x /usr/local/bin/sync-tool
 fi
 
@@ -15,7 +15,7 @@ fi
 
 # Use default configuration if one does not exists already
 if [ ! -f '/etc/sync-tool/config.yaml' ]; then
-  sudo wget -q "https://github.com/chiragsoni81245/sync-tool/blob/$VERSION/config.yaml" -O /etc/sync-tool/config.yaml
+  sudo wget "https://github.com/chiragsoni81245/sync-tool/blob/$VERSION/config.yaml" -O /etc/sync-tool/config.yaml
 
   # Load the sync-tool configuration from Homelab configuration
   sudo yq -i ". = load(\"$HOMELAB_CONFIG\").sync-tool" /etc/sync-tool/config.yaml
