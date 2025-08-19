@@ -2,6 +2,14 @@ profile:
   username: "default"
   email: "" 
 
+samba:
+  shares:
+    - directory: /DATA/Media
+      user: chirag
+      group: smbmedia
+      browseable: "yes"
+      writable: "no"
+
 applications:
   homelab-dashboard:
     enable: true
