@@ -4,7 +4,8 @@ profile:
 
 samba:
   shares:
-    - directory: /DATA/Media
+    - name: "Media"
+      directory: /DATA/Media
       user: chirag
       group: smbmedia
       browseable: "yes"
