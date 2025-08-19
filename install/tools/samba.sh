@@ -10,21 +10,25 @@ SAMBA_CONFIGURATIONS=$(yq -o json ".samba" "$HOMELAB_CONFIG")
 
 
 # Rendering samba configurations from the go template engine
-if [ ! -d "~/.local/share/homelab/config/samba/.current" ]; then
-    mkdir ~/.local/share/homelab/config/samba/.current
+if [ ! -d "$HOME/.local/share/homelab/config/samba/.current" ]; then
+    mkdir "$HOME/.local/share/homelab/config/samba/.current"
 fi
-echo $SAMBA_CONFIGURATIONS | tpl -f "~/.local/share/homelab/config/samba/smb.conf" > "~/.local/share/homelab/config/samba/.current/smb.conf"
-echo $SAMBA_CONFIGURATIONS | tpl -f "~/.local/share/homelab/config/samba/share.conf" > "~/.local/share/homelab/config/samba/.current/share.conf"
+echo $SAMBA_CONFIGURATIONS | tpl -f "$HOME/.local/share/homelab/config/samba/smb.conf" > "$HOME/.local/share/homelab/config/samba/.current/smb.conf"
+echo $SAMBA_CONFIGURATIONS | tpl -f "$HOME/.local/share/homelab/config/samba/share.conf" > "$HOME/.local/share/homelab/config/samba/.current/share.conf"
 
-if ! cmp -s "/etc/samba/smb.conf" "~/.local/share/homelab/config/samba/.current/smb.conf"; then
+if ! cmp -s "/etc/samba/smb.conf" "$HOME/.local/share/homelab/config/samba/.current/smb.conf"; then
     # Copy Samba configurations
-    sudo mv /etc/samba/smb.conf /etc/samba/last_backup_smb.conf
+    if [ -f '/etc/samba/smb.conf' ]; then
+        sudo mv /etc/samba/smb.conf /etc/samba/last_backup_smb.conf
+    fi
     sudo cp ~/.local/share/homelab/config/samba/.current/smb.conf /etc/samba/smb.conf
 fi
 
-if ! cmp -s "/etc/samba/share.conf" "~/.local/share/homelab/config/samba/.current/share.conf"; then
+if ! cmp -s "/etc/samba/share.conf" "$HOME/.local/share/homelab/config/samba/.current/share.conf"; then
     # Copy Samba Shares configurations
-    sudo mv /etc/samba/smb.conf /etc/samba/last_backup_smb_share.conf
+    if [ -f '/etc/samba/share.conf' ]; then
+        sudo mv /etc/samba/share.conf /etc/samba/last_backup_smb_share.conf
+    fi
     sudo cp ~/.local/share/homelab/config/samba/.current/share.conf /etc/samba/share.conf
 fi
 
