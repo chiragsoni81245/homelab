@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if ! command -v nvim &>/dev/null; then
-  sudo apt install -y luarocks
+  sudo apt install -y ripgrep luarocks
 
   # Install nvim
   rm -rf ~/.config/nvim

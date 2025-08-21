@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt install tmux -y
+sudo apt install fzf tmux -y
 
 if [ ! -d "$HOME/.tmux" ]; then
     git clone --single-branch https://github.com/gpakosz/.tmux.git "$HOME/.tmux"
