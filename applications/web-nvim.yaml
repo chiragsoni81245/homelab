@@ -26,7 +26,7 @@ services:
       {{ range $i, $v := .directories }}
       - type: bind
         source: {{ $v.path }} 
-        target: /root/{{ $v.name }}
+        target: /root/code/{{ $v.name }}
       {{ end }}
     networks:
       - nvim_net
