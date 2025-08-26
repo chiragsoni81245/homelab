@@ -51,7 +51,7 @@ applications:
     downloads_path: "/DATA/Downloads/Torrent"
     watch_path: "/DATA/Downloads/Torrent/watch"
 
-  nvim:
+  web-nvim:
     enable: true
     base_url: "http://192.168.0.160"
     username: chirag
