@@ -51,9 +51,10 @@ applications:
     downloads_path: "/DATA/Downloads/Torrent"
     watch_path: "/DATA/Downloads/Torrent/watch"
 
-  vscode:
+  nvim:
     enable: true
     base_url: "http://192.168.0.160"
+    username: chirag
     password: default-password
     directories:
       - name: "data"
