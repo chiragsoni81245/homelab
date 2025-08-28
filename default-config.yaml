@@ -15,7 +15,7 @@ samba:
   shares:
     - name: "Media"
       directory: /DATA/Media
-      valid_users: "chirag user2 user3" 
+      valid_users: "chirag user2 user3 @group-name" 
       group: smbmedia # [optional] it can be provided to fix group of all added/edited files
       browseable: "yes"
       writable: "no"
