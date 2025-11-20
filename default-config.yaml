@@ -33,7 +33,7 @@ applications:
     enable: false
     config_path: "/DATA/AppData/homelab-dashboard/config"
     data_path: "/DATA/AppData/homelab-dashboard/data"
-    logs_path: "/DATA/AppData/homelab-dashboard/logs"
+    log_path: "/DATA/AppData/homelab-dashboard/logs"
 
   plex-server: 
     enable: true
