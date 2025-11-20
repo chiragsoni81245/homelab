@@ -1,0 +1,32 @@
+name: dns-server
+
+networks:
+  dns_server_net:
+    driver: bridge
+
+services:
+  dns-server:
+    hostname: dns-server
+    image: internetsystemsconsortium/bind9:9.18
+    environment:
+      - BIND_LOG_DIR=/var/log/bind
+    ports:
+    - "53:53/udp"
+    - "53:53/tcp"
+    restart: unless-stopped
+    volumes:
+      # Your named.conf, zone files, etc.
+      - {{ .config_path }}:/etc/bind
+
+      # Persist DNS dynamic data, journal files, etc.
+      - {{ .data_path }}:/var/cache/bind
+
+      # Log files (optional but good for debugging)
+      - {{ .log_path }}:/var/log/bind
+    
+    networks:
+      - dns_server_net
+
+    # Optional: increase file limit (Bind loads zones at startup)
+    ulimits:
+      nofile: 4096

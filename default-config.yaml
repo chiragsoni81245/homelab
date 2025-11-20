@@ -29,6 +29,12 @@ applications:
     secret_key: default-secret
     data_path: "/DATA/AppData/homelab-dashboard/data"
 
+  dns-server:
+    enable: false
+    config_path: "/DATA/AppData/homelab-dashboard/config"
+    data_path: "/DATA/AppData/homelab-dashboard/data"
+    logs_path: "/DATA/AppData/homelab-dashboard/logs"
+
   plex-server: 
     enable: true
     base_url: "http://192.168.0.160"
