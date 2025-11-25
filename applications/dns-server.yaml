@@ -1,17 +1,10 @@
 name: dns-server
 
-networks:
-  dns_server_net:
-    driver: bridge
-
 services:
   dns-server:
     hostname: dns-server
     image: chiragsoni812/bind9-server
-    ports:
-    - "53:53/udp"
-    - "53:53/tcp"
-    - "127.0.0.1:953:953/tcp"
+    network_mode: host
     
     restart: always
     volumes:
@@ -24,9 +17,6 @@ services:
       # Log files
       - {{ .log_path }}:/var/log/bind
     
-    networks:
-      - dns_server_net
-
     # Optional: increase file limit (Bind loads zones at startup)
     ulimits:
       nofile: 4096
