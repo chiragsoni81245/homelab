@@ -59,7 +59,10 @@ update() {
 }
 
 # ====== Application Functions ======
-print_spplications_status() {
+print_applications_status() {
+    apps=()
+    pattern=$(IFS='|'; echo "${apps[*]}")
+
     # Loop through each application in config
     yq -r '.applications | to_entries[] | "\(.key) \(.value.enable)"' "$HOMELAB_CONFIG" | \
     while read -r app enable_status; do
@@ -72,18 +75,14 @@ print_spplications_status() {
 
         # Skip if template file not found
         if [[ ! -f "$compose_template" ]]; then
-            echo ">>> $app (Not Found)"
             continue
         fi
 
         if [[ "$enable_status" == "true" ]]; then
-            echo ">>> $app"
-            sudo docker ps -f "name=$app" --format "table {{.ID}}\t{{.Image}}\t{{.Names}}\t{{.Status}}"
-        else
-            echo ">>> $app (Disabled)"
+            apps+=($app)
         fi
-        echo "";
-done
+    done
+    sudo docker ps --format "table {{.ID}}\t{{.Image}}\t{{.Names}}\t{{.Status}}" | grep -E "$pattern"
 }
 
 update_applications() {
@@ -135,7 +134,7 @@ case "$main_cmd" in
         sub_cmd="$1"
         shift || true
         case "$sub_cmd" in
-            status) print_spplications_status ;;
+            status) print_applications_status ;;
             update) update_applications ;;
             *) error "Unknown application subcommand: $sub_cmd" ;;
         esac
