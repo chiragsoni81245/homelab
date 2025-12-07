@@ -6,6 +6,8 @@ networks:
 
 services:
   plex-server:
+    hostname: "plex-server"
+    container_name: "plex-server"
     environment:
       - PUID=1000
       - PGID=1000
@@ -47,4 +49,3 @@ services:
     networks:
       - plex_net
     privileged: false
-    hostname: "plex-server"

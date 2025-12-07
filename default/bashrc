@@ -13,7 +13,7 @@ bind '"\C-f": "~/.local/share/homelab/bin/tmux-sessionizer\n"'
 alias yt-dlp-pl='yt-dlp -f b -o "%(playlist_index)s - %(title)s.%(ext)s" --playlist-items 1- '
 
 alias docker="sudo docker"
-alias docker-pss='sudo docker ps --format "table {{.ID}}\t{{.Image}}\t{{.Names}}\t{{.Status}}"'
+
 alias sync-tool="sudo sync-tool --config /etc/sync-tool/config.yaml"
 
 

@@ -3,6 +3,7 @@ name: dns-server
 services:
   dns-server:
     hostname: dns-server
+    container_name: dns-server
     image: chiragsoni812/bind9-server
     network_mode: host
     

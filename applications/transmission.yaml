@@ -6,6 +6,8 @@ networks:
 
 services:
   transmission:
+    hostname: transmission
+    container_name: transmission
     environment:
       - PEERPORT=51413
       - PGID=1000
@@ -13,7 +15,6 @@ services:
       - USER={{ .username }}
       - PASS={{ .password }}
       - TZ=Asia/Kolkata
-    hostname: transmission
     image: linuxserver/transmission:4.0.4
     labels:
       - "x-homelab=true"

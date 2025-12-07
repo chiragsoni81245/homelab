@@ -4,6 +4,7 @@ set -euo pipefail
 # ===== CONFIG =====
 HOMELAB_DIR="$HOME/.local/share/homelab"
 NVIM_CONFIG_DIR="$HOME/.config/nvim"         # For nvim update-config
+COMPOSE_BASE_DIR="$HOME/.local/share/homelab/applications"
 
 # ===== COLORS =====
 RED='\033[0;31m'
@@ -21,6 +22,7 @@ Commands:
     Pulls the latest changes from git in $HOMELAB_DIR
 
   application
+    status   # print current status of applications
     update   # update the applications based on config 
 
   nvim
@@ -34,6 +36,7 @@ Commands:
 
 Examples:
   $0 update
+  $0 application status
   $0 application update
   $0 nvim update
   $0 samba update
@@ -56,6 +59,33 @@ update() {
 }
 
 # ====== Application Functions ======
+print_spplications_status() {
+    # Loop through each application in config
+    yq -r '.applications | to_entries[] | "\(.key) \(.value.enable)"' "$HOMELAB_CONFIG" | \
+    while read -r app enable_status; do
+        compose_template="$COMPOSE_BASE_DIR/$app.yaml"
+        RENDERED_APPLICATIONS_DIR="$COMPOSE_BASE_DIR/.current"
+        if [ ! -d "$COMPOSE_BASE_DIR/.current" ]; then
+            continue;
+        fi
+        compose_file="$RENDERED_APPLICATIONS_DIR/$app.yaml"
+
+        # Skip if template file not found
+        if [[ ! -f "$compose_template" ]]; then
+            echo ">>> $app (Not Found)"
+            continue
+        fi
+
+        if [[ "$enable_status" == "true" ]]; then
+            echo ">>> $app"
+            sudo docker ps -f "name=$app" --format "table {{.ID}}\t{{.Image}}\t{{.Names}}\t{{.Status}}"
+        else
+            echo ">>> $app (Disabled)"
+        fi
+        echo "";
+done
+}
+
 update_applications() {
     update
 
@@ -105,6 +135,7 @@ case "$main_cmd" in
         sub_cmd="$1"
         shift || true
         case "$sub_cmd" in
+            status) print_spplications_status ;;
             update) update_applications ;;
             *) error "Unknown application subcommand: $sub_cmd" ;;
         esac

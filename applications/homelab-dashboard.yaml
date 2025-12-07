@@ -6,6 +6,8 @@ networks:
 
 services:
   homelab-dashboard:
+    hostname: homelab-dashboard
+    container_name: homelab-dashboard
     environment:
       - HostProc=/host/proc
       - HostSys=/host/sys
@@ -16,7 +18,7 @@ services:
       - APP_SERVER_SECRET_KEY={{ .secret_key }}
       - APP_SERVER_ADMIN_AUTH_USERNAME={{ .username }}
       - APP_SERVER_ADMIN_AUTH_PASSWORD={{ .password }}
-    hostname: homelab-dashboard
+    
     image: chiragsoni812/homelab-dashboard:latest
     ports:
       - target: 8080

@@ -6,10 +6,12 @@ networks:
 
 services:
   nvim:
+    hostname: nvim
+    container_name: nvim
     environment:
       - GOTTY_CREDENTIAL={{ .username }}:{{ .password }}
       - GOTTY_PORT=8080
-    hostname: nvim
+
     image: chiragsoni812/web-nvim:latest
     labels:
       - "x-homelab=true"
