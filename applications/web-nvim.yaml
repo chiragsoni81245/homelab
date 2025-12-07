@@ -25,10 +25,15 @@ services:
         protocol: tcp
     restart: unless-stopped
     volumes:
-      {{ range $i, $v := .directories }}
+      {{ range $i, $v := .user_directories }}
       - type: bind
         source: {{ $v.path }} 
         target: /root/code/{{ $v.name }}
+      {{ end }}
+      {{ if .ssh_directory }}
+      - type: bind
+        source: {{ .ssh_directory }} 
+        target: /root/.ssh
       {{ end }}
     networks:
       - web_nvim_net

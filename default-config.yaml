@@ -62,6 +62,7 @@ applications:
     base_url: "http://192.168.0.160"
     username: chirag
     password: default-password
-    directories:
+    user_directories:
       - name: "data"
         path: "/DATA/"
+    ssh_directory: "~/.ssh"
