@@ -18,7 +18,7 @@ services:
     image: linuxserver/transmission:4.0.4
     labels:
       - "x-homelab=true"
-      - "x-homelab-index=2"
+      - "x-homelab-index=3"
       - "x-homelab-name=transmission"
       - "x-homelab-web-url={{ .base_url }}:9091/"
       - "x-homelab-icon=https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Transmission/icon.png"

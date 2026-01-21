@@ -1,0 +1,41 @@
+name: nginx_proxy_manager
+
+networks:
+  nginx_proxy_manager_net:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.host_binding_ipv4: "0.0.0.0" # Allow its access on all hosts
+
+services:
+  nginx_proxy_manager:
+    hostname: nginx_proxy_manager
+    container_name: nginx_proxy_manager
+    image: 'jc21/nginx-proxy-manager:latest'
+
+    environment:
+      TZ: "Asia/Kolkata"
+
+    labels:
+      - "x-homelab=true"
+      - "x-homelab-index=0"
+      - "x-homelab-name=nginx proxy manager"
+      - "x-homelab-web-url={{ .base_url }}:81/"
+      - "x-homelab-icon=https://nginxproxymanager.com/logo.svg"
+
+    ports:
+      - '80:80' # Public HTTP Port
+      - '443:443' # Public HTTPS Port
+      - '81:81' # Admin Web Port
+
+    volumes:
+      - type: bind
+        source: {{ .data_path }}
+        target: /data
+      - type: bind
+        source: {{ .letsencrypt_path }}
+        target: /etc/letsencrypt
+
+    restart: unless-stopped
+    networks:
+      - nginx_proxy_manager_net
+    privileged: false

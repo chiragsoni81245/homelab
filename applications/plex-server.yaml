@@ -17,7 +17,7 @@ services:
     image: lscr.io/linuxserver/plex:latest
     labels:
       - "x-homelab=true"
-      - "x-homelab-index=0"
+      - "x-homelab-index=1"
       - "x-homelab-name=plex"
       - "x-homelab-web-url={{ .base_url }}:32400/"
       - "x-homelab-icon=https://www.plex.tv/wp-content/themes/plex/assets/img/plex-logo.svg"
