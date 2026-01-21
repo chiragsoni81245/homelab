@@ -34,10 +34,10 @@ echo -e "\n[+] Patch after.rules for docker port bypass issue fix..."
 sudo tee -a /etc/ufw/after.rules < ~/.local/share/homelab/config/ufw/after.rules > /dev/null
 
 echo -e "\n[+] Allow Samba on lan network..."
-sudo ufw allow from "$LAN_CIDR" to any port 445 proto tcp
-sudo ufw allow from "$LAN_CIDR" to any port 139 proto tcp
-sudo ufw allow from "$LAN_CIDR" to any port 137 proto udp
-sudo ufw allow from "$LAN_CIDR" to any port 138 proto udp
+sudo ufw allow from "$LAN_CIDR" to any port 445 proto tcp comment "Samba from LAN on 445"
+sudo ufw allow from "$LAN_CIDR" to any port 139 proto tcp comment "Samba from LAN on 139"
+sudo ufw allow from "$LAN_CIDR" to any port 137 proto udp comment "Samba from LAN on 137"
+sudo ufw allow from "$LAN_CIDR" to any port 138 proto udp comment "Samba from LAN on 138"
 
 echo -e "\n[+] Enabling UFW..."
 sudo ufw --force enable
