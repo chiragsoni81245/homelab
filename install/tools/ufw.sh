@@ -34,7 +34,7 @@ echo -e "\n[+] IPv6 support..."
 sudo sed -i "s/^IPV6=.*/IPV6=${ENABLE_IPV6}/" /etc/default/ufw
 
 echo -e "\n[+] Patch after.rules for docker port bypass issue fix..."
-sudo cat ~/.local/share/homelab/config/ufw/after.rules >> /etc/ufw/after.rules
+sudo tee -a /etc/ufw/after.rules < ~/.local/share/homelab/config/ufw/after.rules > /dev/null
 
 echo -e "\n[+] Enabling UFW..."
 sudo ufw --force enable
