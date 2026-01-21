@@ -33,6 +33,9 @@ sudo ufw limit "$SSH_PORT"/tcp comment "SSH rate limiting"
 echo "[+] IPv6 support..."
 sudo sed -i "s/^IPV6=.*/IPV6=${ENABLE_IPV6}/" /etc/default/ufw
 
+echo "[+] Setting up after rules for docker networking bypass block..."
+sudo cp ~/.local/share/homelab/config/ufw/after.rules /etc/ufw/after.rules
+
 echo "[+] Enabling UFW..."
 sudo ufw --force enable
 
