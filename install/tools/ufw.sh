@@ -33,6 +33,12 @@ sudo sed -i "s/^IPV6=.*/IPV6=${ENABLE_IPV6}/" /etc/default/ufw
 echo -e "\n[+] Patch after.rules for docker port bypass issue fix..."
 sudo tee -a /etc/ufw/after.rules < ~/.local/share/homelab/config/ufw/after.rules > /dev/null
 
+echo -e "\n[+] Allow Samba on lan network..."
+sudo ufw allow from "$LAN_CIDR" to any port 445 proto tcp
+sudo ufw allow from "$LAN_CIDR" to any port 139 proto tcp
+sudo ufw allow from "$LAN_CIDR" to any port 137 proto udp
+sudo ufw allow from "$LAN_CIDR" to any port 138 proto udp
+
 echo -e "\n[+] Enabling UFW..."
 sudo ufw --force enable
 
