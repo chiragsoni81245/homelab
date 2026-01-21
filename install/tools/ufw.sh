@@ -24,9 +24,6 @@ echo -e "\n[+] Allow HTTP/HTTPS..."
 sudo ufw allow 80/tcp comment "HTTP"
 sudo ufw allow 443/tcp comment "HTTPS"
 
-echo -e "\n[+] Allow ICMP (ping)..."
-sudo ufw allow from "$LAN_CIDR" to any proto icmp comment "Ping"
-
 echo -e "\n[+] Rate limit SSH..."
 sudo ufw limit "$SSH_PORT"/tcp comment "SSH rate limiting"
 
