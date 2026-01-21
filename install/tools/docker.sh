@@ -15,3 +15,7 @@ echo \
 sudo apt-get update
 
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+sudo cp ~/.local/share/homelab/config/docker/daemon.json /etc/docker/daemon.json
+
+sudo systemctl restart docker
