@@ -1,6 +1,12 @@
 profile:
   username: "default"
-  email: "" 
+  email: ""
+
+server:
+  lan_cidr: "192.168.0.0/24"
+
+ufw:
+  enable_ipv6: "no"
 
 # ------------- Uncomment this if you want to use sync-tool -------------
 # sync-tool:

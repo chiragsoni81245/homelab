@@ -44,6 +44,7 @@ source $HOMELAB_INSTALL/config/timezones.sh
 show_logo decrypt 920
 show_subtext "Installing terminal tools [2/4]"
 source $HOMELAB_INSTALL/tools/terminal.sh
+source $HOMELAB_INSTALL/tools/ufw.sh
 source $HOMELAB_INSTALL/tools/nvim.sh
 source $HOMELAB_INSTALL/tools/tmux.sh
 source $HOMELAB_INSTALL/tools/yt-dlp.sh
