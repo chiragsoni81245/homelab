@@ -21,8 +21,8 @@ echo -e "\n[+] Allow SSH from LAN only..."
 sudo ufw allow from "$LAN_CIDR" to any port "$SSH_PORT" proto tcp comment "SSH from LAN"
 
 echo -e "\n[+] Allow HTTP/HTTPS..."
-sudo ufw allow 80/tcp comment "HTTP"
-sudo ufw allow 443/tcp comment "HTTPS"
+sudo ufw route allow 80/tcp comment "HTTP"
+sudo ufw route allow 443/tcp comment "HTTPS"
 
 echo -e "\n[+] Rate limit SSH..."
 sudo ufw limit "$SSH_PORT"/tcp comment "SSH rate limiting"
