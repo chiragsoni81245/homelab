@@ -40,7 +40,7 @@ sudo ufw allow from "$LAN_CIDR" to any port 139 proto tcp comment "Samba from LA
 sudo ufw allow from "$LAN_CIDR" to any port 137 proto udp comment "Samba from LAN on 137"
 sudo ufw allow from "$LAN_CIDR" to any port 138 proto udp comment "Samba from LAN on 138"
 
-echo -r "\n[+] Allow DNS Server for lan network..."
+echo -e "\n[+] Allow DNS Server for lan network..."
 sudo ufw allow from "$LAN_CIDR" to any port 53 proto udp comment "DNS Server"
 sudo ufw allow from "$LAN_CIDR" to any port 53 proto tcp comment "DNS Server"
 sudo ufw allow from "$LAN_CIDR" to any port 953 proto tcp comment "DNS Server"
