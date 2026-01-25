@@ -46,7 +46,8 @@ while read -r app enable_status; do
         echo $APP_CONFIGURATIONS | tpl -f $compose_template > $compose_file
 
         if [[ "$RECREATE" == true ]]; then
-            sudo docker compose -f "$compose_file" up -d --force-recreate
+            sudo docker compose -f "$compose_file" down
+            sudo docker compose -f "$compose_file" up -d
         else
             sudo docker compose -f "$compose_file" up -d
         fi
