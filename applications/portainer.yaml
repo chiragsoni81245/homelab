@@ -13,7 +13,7 @@ services:
       - "x-homelab=true"
       - "x-homelab-index=2"
       - "x-homelab-name=portainer"
-      - "x-homelab-web-url={{ .base_url }}:9000/"
+      - "x-homelab-web-url={{ .base_url }}"
       - "x-homelab-icon=https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Portainer/icon.png"
     ports:
       - target: 8000

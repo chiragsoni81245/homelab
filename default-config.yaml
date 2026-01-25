@@ -43,7 +43,7 @@ applications:
 
   plex-server: 
     enable: true
-    base_url: "http://192.168.0.160"
+    base_url: "http://192.168.0.160:32400"
     plex_claim: "<plex-claim>"
     config_path: "/DATA/AppData/plex/config"
     transcode_path: "/DATA/AppData/plex/transcode"
@@ -51,12 +51,12 @@ applications:
 
   portainer: 
     enable: true
-    base_url: "http://192.168.0.160"
+    base_url: "http://192.168.0.160:9000"
     config_path: "/DATA/AppData/portainer"
 
   transmission: 
     enable: true
-    base_url: "http://192.168.0.160"
+    base_url: "http://192.168.0.160:9091"
     username: admin
     password: default-password 
     config_path: "/DATA/AppData/transmission/config"
@@ -65,13 +65,13 @@ applications:
 
   nginx-proxy-manager:
     enable: true
-    base_url: "http://192.168.0.160"
+    base_url: "http://192.168.0.160:81"
     data_path: "/DATA/AppData/nginx-proxy-manager/data"
     letsencrypt_path: "/DATA/AppData/nginx-proxy-manager/letsencrypt"
 
   web-nvim:
     enable: true
-    base_url: "http://192.168.0.160"
+    base_url: "http://192.168.0.160:8088"
     username: chirag
     password: default-password
     user_directories:
