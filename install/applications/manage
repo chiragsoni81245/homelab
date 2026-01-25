@@ -1,4 +1,18 @@
 #!/bin/bash
+set -euo pipefail
+
+RECREATE=false
+
+for arg in "$@"; do
+  case "$arg" in
+    --recreate)
+      RECREATE=true
+      shift
+      ;;
+    *)
+      ;;
+  esac
+done
 
 COMPOSE_BASE_DIR="$HOME/.local/share/homelab/applications"
 
@@ -31,7 +45,11 @@ while read -r app enable_status; do
         APP_CONFIGURATIONS=$(yq -o json ".applications[\"$app\"]" "$HOMELAB_CONFIG")
         echo $APP_CONFIGURATIONS | tpl -f $compose_template > $compose_file
 
-        sudo docker compose -f "$compose_file" up -d
+        if [[ "$RECREATE" == true ]]; then
+            sudo docker compose -f "$compose_file" up -d --force-recreate
+        else
+            sudo docker compose -f "$compose_file" up -d
+        fi
         echo "*** Enabled: $app"
     else
         echo ">>> Disabling: $app"

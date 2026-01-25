@@ -11,7 +11,7 @@ _mytool_completions() {
     local nvim_sub="update"
 
     # Application subcommands
-    local application_sub="status update"
+    local application_sub="status update recreate"
 
     # Samba subcommand
     local samba_sub="update"
