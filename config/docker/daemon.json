@@ -4,10 +4,5 @@
       "base": "10.200.0.0/16",
       "size": 24
     }
-  ],
-  "default-network-opts": {
-    "bridge": {
-      "com.docker.network.bridge.host_binding_ipv4": "127.0.0.1"
-    }
-  }
+  ]
 }
