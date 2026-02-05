@@ -37,9 +37,14 @@ applications:
 
   dns-server:
     enable: false
-    config_path: "/DATA/AppData/homelab-dashboard/config"
-    data_path: "/DATA/AppData/homelab-dashboard/data"
-    log_path: "/DATA/AppData/homelab-dashboard/logs"
+    config_path: "/DATA/AppData/dns-server/config"
+    data_path: "/DATA/AppData/dns-server/data"
+    log_path: "/DATA/AppData/dns-server/logs"
+
+  netbird-client:
+    enable: false
+    setup_key: "<your_setup_key_from_netbird_dashboard>"
+    config_path: "/DATA/AppData/netbird-client/config"
 
   plex-server:
     enable: false
