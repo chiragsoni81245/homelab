@@ -8,7 +8,6 @@ services:
   plex-server:
     hostname: "jellyfin-server"
     container_name: "jellyfin-server"
-    user: 1000:1000
     environment:
       - JELLYFIN_PublishedServerUrl={{ .base_url }}
     image: jellyfin/jellyfin
