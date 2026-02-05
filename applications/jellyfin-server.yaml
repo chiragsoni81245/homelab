@@ -1,0 +1,45 @@
+name: plex-server
+
+networks:
+  plex_net:
+    driver: bridge
+
+services:
+  plex-server:
+    hostname: "jellyfin-server"
+    container_name: "jellyfin-server"
+    user: 1000:1000
+    environment:
+      - JELLYFIN_PublishedServerUrl={{ .base_url }}
+    image: jellyfin/jellyfin
+    labels:
+      - "x-homelab=true"
+      - "x-homelab-index=1"
+      - "x-homelab-name=jellyfin"
+      - "x-homelab-web-url={{ .base_url }}"
+      - "x-homelab-icon=https://play-lh.googleusercontent.com/FAlWhVMAjAzI6Nxc7bf4KPgjbwA3GT9j2bzeAMnRpdWim_2SXnS9i4zhwasKWIC8PV4=w240-h480"
+    restart: unless-stopped
+    volumes:
+      {{ if .config_path }}
+      - type: bind
+        source: {{ .config_path }}
+        target: /config
+      {{ end }}
+      {{ if .cache_path }}
+      - type: bind
+        source: {{ .cache_path }}
+        target: /cache
+      {{ end }}
+      {{ if .media_path }}
+      - type: bind
+        source: {{ .media_path }}
+        target: /media
+      {{ end }}
+    ports:
+      - 8096:8096/tcp
+      - 7359:7359/udp
+    networks:
+      - plex_net
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    privileged: false

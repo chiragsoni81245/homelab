@@ -41,12 +41,19 @@ applications:
     data_path: "/DATA/AppData/homelab-dashboard/data"
     log_path: "/DATA/AppData/homelab-dashboard/logs"
 
-  plex-server: 
-    enable: true
+  plex-server:
+    enable: false
     base_url: "http://192.168.0.160:32400"
     plex_claim: "<plex-claim>"
     config_path: "/DATA/AppData/plex/config"
     transcode_path: "/DATA/AppData/plex/transcode"
+    media_path: "/DATA/Media"
+
+  jellyfin-server: 
+    enable: true
+    base_url: "http://192.168.0.160:32400"
+    config_path: "/DATA/AppData/jellyfin/config"
+    cache_path: "/DATA/AppData/jellyfin/cache"
     media_path: "/DATA/Media"
 
   portainer: 
