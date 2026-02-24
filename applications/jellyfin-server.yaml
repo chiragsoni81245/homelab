@@ -18,6 +18,8 @@ services:
       - "x-homelab-web-url={{ .base_url }}"
       - "x-homelab-icon=https://play-lh.googleusercontent.com/FAlWhVMAjAzI6Nxc7bf4KPgjbwA3GT9j2bzeAMnRpdWim_2SXnS9i4zhwasKWIC8PV4=w240-h480"
     restart: unless-stopped
+    devices:
+      - /dev/dri:/dev/dri # for hardware acceleration
     volumes:
       {{ if .config_path }}
       - type: bind
