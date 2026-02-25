@@ -30,13 +30,21 @@ services:
     volumes:
       {{ range $i, $v := .user_directories }}
       - type: bind
-        source: {{ $v.path }} 
+        source: {{ $v.path }}
+        {{ if and .uid .gid }}
+        target: /home/ubuntu/code/{{ $v.name }}
+        {{ else }}
         target: /root/code/{{ $v.name }}
+        {{ end }}
       {{ end }}
       {{ if .ssh_directory }}
       - type: bind
         source: {{ .ssh_directory }} 
+        {{ if and .uid .gid }}
+        target: /home/ubuntu/.ssh
+        {{ else }}
         target: /root/.ssh
+        {{ end }}
       {{ end }}
     networks:
       - web_nvim_net
