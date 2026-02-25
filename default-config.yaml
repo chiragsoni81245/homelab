@@ -86,6 +86,9 @@ applications:
     base_url: "http://192.168.0.160:8088"
     username: chirag
     password: default-password
+    # When any of uid and gid not passed default root user and root group is used is used
+    uid: "" # User Id which you want to be in this container
+    gid: "" # User Group Id which you want to be in this container
     user_directories:
       - name: "data"
         path: "/DATA/"
