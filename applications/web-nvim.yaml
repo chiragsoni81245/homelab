@@ -31,7 +31,7 @@ services:
       {{ range $i, $v := .user_directories }}
       - type: bind
         source: {{ $v.path }}
-        {{ if and .uid .gid }}
+        {{ if and $.uid $.gid }}
         target: /home/ubuntu/code/{{ $v.name }}
         {{ else }}
         target: /root/code/{{ $v.name }}
