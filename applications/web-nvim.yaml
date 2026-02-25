@@ -13,7 +13,7 @@ services:
       - GOTTY_PORT=8080
 
     image: chiragsoni812/web-nvim:latest
-    {{ if (.uid && .gid) }}
+    {{ if (.uid and .gid) }}
     user: "{{ .uid }}:{{ .gid }}"
     {{ end }}
     labels:
