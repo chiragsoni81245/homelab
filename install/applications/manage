@@ -47,8 +47,10 @@ while read -r app enable_status; do
 
         if [[ "$RECREATE" == true ]]; then
             sudo docker compose -f "$compose_file" down
+            sudo docker compose -f "$compose_file" pull
             sudo docker compose -f "$compose_file" up -d
         else
+            sudo docker compose -f "$compose_file" pull
             sudo docker compose -f "$compose_file" up -d
         fi
         echo "*** Enabled: $app"
