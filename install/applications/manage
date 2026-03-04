@@ -12,8 +12,8 @@ for arg in "$@"; do
       shift || true
       ;;
     --application)
-      APPLICATION_NAME="$1"
       shift || true
+      APPLICATION_NAME="$1"
       ;;
     *)
       ;;
