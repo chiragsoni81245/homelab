@@ -2,12 +2,18 @@
 set -euo pipefail
 
 RECREATE=false
+APPLICATION_NAME="all"
+APPLICATION_FOUND=false
 
 for arg in "$@"; do
   case "$arg" in
     --recreate)
       RECREATE=true
-      shift
+      shift || true
+      ;;
+    --application)
+      APPLICATION_NAME="$1"
+      shift || true
       ;;
     *)
       ;;
@@ -19,10 +25,16 @@ COMPOSE_BASE_DIR="$HOME/.local/share/homelab/applications"
 # Loop through each application in config
 yq -r '.applications | to_entries[] | "\(.key) \(.value.enable)"' "$HOMELAB_CONFIG" | \
 while read -r app enable_status; do
+    if [[ "$APPLICATION_NAME" == "all" || "$APPLICATION_NAME" == "$app" ]]; then
+        APPLICATION_FOUND=true
+    else
+        continue
+    fi
+
     compose_template="$COMPOSE_BASE_DIR/$app.yaml"
 
     RENDERED_APPLICATIONS_DIR="$COMPOSE_BASE_DIR/.current"
-    if [ ! -d "$COMPOSE_BASE_DIR/.current" ]; then
+    if [[ ! -d "$COMPOSE_BASE_DIR/.current" ]]; then
         mkdir $RENDERED_APPLICATIONS_DIR
     fi
     compose_file="$RENDERED_APPLICATIONS_DIR/$app.yaml"
@@ -60,3 +72,7 @@ while read -r app enable_status; do
         echo "*** Disabled: $app"
     fi
 done
+
+if [[ "$APPLICATION_FOUND" == "false" ]]; then
+    echo "No application exists with name $APPLICATION_NAME"
+fi

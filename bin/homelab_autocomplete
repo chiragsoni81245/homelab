@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
+
 _mytool_completions() {
     local cur prev words cword
+    local HOMELAB_DIR="$HOME/.local/share/homelab"
     _init_completion || return
 
     # Top-level commands
@@ -13,12 +15,28 @@ _mytool_completions() {
     # Application subcommands
     local application_sub="status update recreate"
 
+    # Generate application update subcommands from filenames
+    local application_update_sub="all"
+    local update_dir="$HOMELAB_DIR/applications/.current"
+    if [[ -d "$update_dir" ]]; then
+        for f in "$update_dir"/*.yaml; do
+            [[ -f "$f" ]] || continue
+            name=$(basename "$f")
+            name="${name%.*}"
+            application_update_sub+=" $name"
+        done
+    fi
+
     # Samba subcommand
     local samba_sub="update"
 
     case "${COMP_WORDS[1]}" in
         application)
-            COMPREPLY=( $(compgen -W "$application_sub" -- "$cur") )
+            if [[ "${COMP_WORDS[2]}" == "update" ]]; then
+                COMPREPLY=( $(compgen -W "$application_update_sub" -- "$cur") )
+            else
+                COMPREPLY=( $(compgen -W "$application_sub" -- "$cur") )
+            fi
             ;;
         nvim)
             COMPREPLY=( $(compgen -W "$nvim_sub" -- "$cur") )

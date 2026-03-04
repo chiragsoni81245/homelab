@@ -86,10 +86,15 @@ print_applications_status() {
 }
 
 update_applications() {
+    local application_name=$1
     update
 
     echo -e "${GREEN}[UPDATE]${NC} applying latest changes in on applications based on $HOMELAB_CONFIG"
-    bash $HOME/.local/share/homelab/install/applications/manage
+    if [ "$application_name" == "all" ]; then
+        bash $HOME/.local/share/homelab/install/applications/manage
+    else
+        bash $HOME/.local/share/homelab/install/applications/manage --application $application_name
+    fi
 }
 
 recreate_applications() {
@@ -142,7 +147,7 @@ case "$main_cmd" in
         shift || true
         case "$sub_cmd" in
             status) print_applications_status ;;
-            update) update_applications ;;
+            update) update_applications $1 ;;
             recreate) recreate_applications ;;
             *) error "Unknown application subcommand: $sub_cmd" ;;
         esac
