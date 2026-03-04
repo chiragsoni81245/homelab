@@ -90,7 +90,7 @@ update_applications() {
     update
 
     echo -e "${GREEN}[UPDATE]${NC} applying latest changes in on applications based on $HOMELAB_CONFIG"
-    if [ "$application_name" == "all" ]; then
+    if [ "$application_name" == "" ]; then
         bash $HOME/.local/share/homelab/install/applications/manage
     else
         bash $HOME/.local/share/homelab/install/applications/manage --application $application_name
