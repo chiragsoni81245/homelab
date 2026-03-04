@@ -23,7 +23,6 @@ done
 COMPOSE_BASE_DIR="$HOME/.local/share/homelab/applications"
 
 # Loop through each application in config
-yq -r '.applications | to_entries[] | "\(.key) \(.value.enable)"' "$HOMELAB_CONFIG" | \
 while read -r app enable_status; do
     if [[ "$APPLICATION_NAME" == "all" || "$APPLICATION_NAME" == "$app" ]]; then
         APPLICATION_FOUND="true"
@@ -71,7 +70,7 @@ while read -r app enable_status; do
         sudo docker compose -f "$compose_file" down
         echo "*** Disabled: $app"
     fi
-done
+done < <(yq -r '.applications | to_entries[] | "\(.key) \(.value.enable)"' "$HOMELAB_CONFIG")
 
 if [[ "$APPLICATION_FOUND" != "true" ]]; then
     echo "No application exists with name $APPLICATION_NAME"
