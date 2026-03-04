@@ -1,11 +1,11 @@
-name: plex-server
+name: jellyfin-server
 
 networks:
-  plex_net:
+  jellyfin_net:
     driver: bridge
 
 services:
-  plex-server:
+  jellyfin-server:
     hostname: "jellyfin-server"
     container_name: "jellyfin-server"
     environment:
@@ -40,7 +40,7 @@ services:
       - 8096:8096/tcp
       - 7359:7359/udp
     networks:
-      - plex_net
+      - jellyfin_net
     extra_hosts:
       - 'host.docker.internal:host-gateway'
     privileged: false
