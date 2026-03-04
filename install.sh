@@ -37,6 +37,7 @@ source $HOMELAB_INSTALL/preflight/presentation.sh
 # Configuration
 show_logo beams 240
 show_subtext "Let's install Homelab! [1/4]"
+source $HOMELAB_INSTALL/config/become_sudo.sh
 source $HOMELAB_INSTALL/config/config.sh
 source $HOMELAB_INSTALL/config/timezones.sh
 
