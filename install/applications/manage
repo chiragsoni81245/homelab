@@ -13,7 +13,7 @@ for arg in "$@"; do
       ;;
     --application)
       shift || true
-      APPLICATION_NAME="${1:-}"
+      APPLICATION_NAME="${1:-all}"
       ;;
     *)
       ;;
