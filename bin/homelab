@@ -147,7 +147,7 @@ case "$main_cmd" in
         shift || true
         case "$sub_cmd" in
             status) print_applications_status ;;
-            update) update_applications $1 ;;
+            update) update_applications "${1:-}" ;;
             recreate) recreate_applications ;;
             *) error "Unknown application subcommand: $sub_cmd" ;;
         esac

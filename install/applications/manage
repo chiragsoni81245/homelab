@@ -2,7 +2,7 @@
 set -euo pipefail
 
 RECREATE=false
-APPLICATION_NAME=""
+APPLICATION_NAME="all"
 APPLICATION_FOUND="false"
 
 for arg in "$@"; do
@@ -13,7 +13,7 @@ for arg in "$@"; do
       ;;
     --application)
       shift || true
-      APPLICATION_NAME="$@"
+      APPLICATION_NAME="${1:-}"
       ;;
     *)
       ;;
@@ -25,7 +25,7 @@ COMPOSE_BASE_DIR="$HOME/.local/share/homelab/applications"
 # Loop through each application in config
 yq -r '.applications | to_entries[] | "\(.key) \(.value.enable)"' "$HOMELAB_CONFIG" | \
 while read -r app enable_status; do
-    if [[ "$APPLICATION_NAME" == "" || "$APPLICATION_NAME" == "$app" ]]; then
+    if [[ "$APPLICATION_NAME" == "all" || "$APPLICATION_NAME" == "$app" ]]; then
         APPLICATION_FOUND="true"
     else
         continue
