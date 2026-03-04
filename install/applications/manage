@@ -73,6 +73,6 @@ while read -r app enable_status; do
     fi
 done
 
-if [[ "$APPLICATION_FOUND" == "false" ]]; then
+if [[ "$APPLICATION_FOUND" != "true" ]]; then
     echo "No application exists with name $APPLICATION_NAME"
 fi
