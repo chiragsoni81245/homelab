@@ -11,6 +11,7 @@ services:
     environment:
       - GOTTY_CREDENTIAL={{ .username }}:{{ .password }}
       - GOTTY_PORT=8080
+      - SSH_AUTH_SOCK=/ssh-agent
 
     image: chiragsoni812/web-nvim:latest
     {{ if and .uid .gid }}
@@ -43,9 +44,6 @@ services:
         target: /ssh-agent
       {{ end }}
 
-    environment:
-      - SSH_AUTH_SOCK=/ssh-agent
-    
     networks:
       - web_nvim_net
     privileged: false
