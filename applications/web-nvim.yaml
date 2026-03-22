@@ -37,15 +37,15 @@ services:
         target: /root/code/{{ $v.name }}
         {{ end }}
       {{ end }}
-      {{ if .ssh_directory }}
+      {{ if .ssh_agent }}
       - type: bind
-        source: {{ .ssh_directory }} 
-        {{ if and .uid .gid }}
-        target: /home/ubuntu/.ssh
-        {{ else }}
-        target: /root/.ssh
-        {{ end }}
+        source: {{ .ssh_agent }} 
+        target: /ssh-agent
       {{ end }}
+
+    environment:
+      - SSH_AUTH_SOCK=/ssh-agent
+    
     networks:
       - web_nvim_net
     privileged: false

@@ -92,4 +92,4 @@ applications:
     user_directories:
       - name: "data"
         path: "/DATA/"
-    ssh_directory: "~/.ssh"
+    ssh_agent: "/tmp/ssh-agent.sock"
