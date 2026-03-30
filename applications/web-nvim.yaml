@@ -12,7 +12,6 @@ services:
       - GOTTY_CREDENTIAL={{ .username }}:{{ .password }}
       - GOTTY_PORT=8080
       - SSH_AUTH_SOCK=/ssh-agent.sock
-      - CLAUDE_CODE_OAUTH_TOKEN={{ .claude_code_token }}
 
     image: chiragsoni812/web-nvim:latest
     {{ if and .uid .gid }}
