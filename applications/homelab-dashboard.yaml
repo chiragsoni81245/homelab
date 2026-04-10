@@ -18,6 +18,9 @@ services:
       - APP_SERVER_SECRET_KEY={{ .secret_key }}
       - APP_SERVER_ADMIN_AUTH_USERNAME={{ .username }}
       - APP_SERVER_ADMIN_AUTH_PASSWORD={{ .password }}
+      {{ if .background_image }}
+      - APP_UI_BACKGROUND_IMAGE={{ .background_image }}
+      {{ end }}
     
     image: chiragsoni812/homelab-dashboard:latest
     ports:
