@@ -93,3 +93,20 @@ applications:
       - name: "data"
         path: "/DATA/"
     ssh_agent: "/tmp/ssh-agent.sock"
+
+  planka:
+    enable: true
+    base_url: "http://192.168.0.160:3001"
+    secret_key: "my-secret-key"
+    data_path: "/DATA/AppData/planka"
+    admin:
+      email: "email@gmail.com"
+      password: "mypassword"
+      name: "User"
+      username: "user"
+    
+
+
+
+
+

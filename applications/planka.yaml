@@ -1,0 +1,98 @@
+services:
+  planka:
+    image: ghcr.io/plankanban/planka:latest
+    restart: on-failure
+    volumes:
+      - data:/app/data
+    ports:
+      - 3001:1337
+    labels:
+      - "x-homelab=true"
+      - "x-homelab-index=5"
+      - "x-homelab-name=Planka"
+      - "x-homelab-web-url={{ .base_url }}"
+      - "x-homelab-icon=https://planka.app/assets/PLANKA_enterprisey_glyph_white_duo_inverse_256-C1dEXeKQ.png"
+    environment:
+      - SECRET_KEY={{ .secret_key }}
+      - DATABASE_URL=postgresql://postgres@postgres/planka
+      - BASE_URL={{ .base_url }}
+      - LOG_LEVEL=warn
+      - SWAGGER_EXPOSED=true
+      - DEFAULT_LANGUAGE=en-US
+
+      # Do not comment out DEFAULT_ADMIN_EMAIL if you want to prevent this user from being edited/deleted
+      - DEFAULT_ADMIN_EMAIL={{ .admin.email }}
+      - DEFAULT_ADMIN_PASSWORD={{ .admin.password }}
+      - DEFAULT_ADMIN_NAME={{ .admin.name }}
+      - DEFAULT_ADMIN_USERNAME={{ .admin.username }}
+
+      # - TRUST_PROXY=true
+      # - MAX_UPLOAD_FILE_SIZE=
+      # - TOKEN_EXPIRES_IN=365 # In days
+
+      # - STORAGE_LIMIT=
+      # - ACTIVE_USERS_LIMIT=
+
+      # Set to true to show more detailed authentication error messages.
+      # It should not be enabled without a rate limiter for security reasons.
+      # - SHOW_DETAILED_AUTH_ERRORS=false
+
+      # All outgoing HTTP requests (SMTP, webhooks, Apprise notifications, favicon fetching, etc.)
+      # will be sent through this proxy if set.
+      # If commented out, an internal Squid proxy will be started inside the container,
+      # which you can control via OUTGOING_BLOCKED_* and OUTGOING_ALLOWED_* below.
+      # - OUTGOING_PROXY=http://proxy:3128
+
+      # --------------------------------------------------------------------
+      # Outgoing traffic control (internal Squid proxy)
+      # --------------------------------------------------------------------
+
+      # These IPs/hostnames will always be blocked (highest priority)
+      # - OUTGOING_BLOCKED_IPS=
+      # - OUTGOING_BLOCKED_HOSTS=localhost,postgres
+
+      # Only these IPs/hostnames will be reachable
+      # - OUTGOING_ALLOWED_IPS=
+      # - OUTGOING_ALLOWED_HOSTS=
+
+      # Email Notifications (https://nodemailer.com/smtp/)
+      # These values override and disable configuration in the UI if set.
+      # - SMTP_HOST=
+      # - SMTP_PORT=587
+      # - SMTP_NAME=
+      # - SMTP_SECURE=true
+      # - SMTP_TLS_REJECT_UNAUTHORIZED=false
+      # - SMTP_USER=
+      # - SMTP_PASSWORD=
+      # - SMTP_FROM="Demo Demo" <demo@demo.demo>
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:16-alpine
+    restart: on-failure
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=planka
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d planka"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: "{{ .data_path }}/app-data"
+  db-data: 
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: "{{ .data_path }}/db-data"
