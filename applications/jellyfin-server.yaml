@@ -12,7 +12,7 @@ services:
       - JELLYFIN_PublishedServerUrl={{ .base_url }}
       - LIBVA_DRIVER_NAME=iHD
     group_add:
-      - "render"
+      - "993" # for render group
     image: jellyfin/jellyfin
     labels:
       - "x-homelab=true"
