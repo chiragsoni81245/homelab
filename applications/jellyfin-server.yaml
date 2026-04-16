@@ -10,6 +10,9 @@ services:
     container_name: "jellyfin-server"
     environment:
       - JELLYFIN_PublishedServerUrl={{ .base_url }}
+      - LIBVA_DRIVER_NAME=iHD
+    group_add:
+      - "render"
     image: jellyfin/jellyfin
     labels:
       - "x-homelab=true"
