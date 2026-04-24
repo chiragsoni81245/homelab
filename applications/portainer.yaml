@@ -11,7 +11,7 @@ services:
     image: portainer/portainer-ce:2.21.1
     labels:
       - "x-homelab=true"
-      - "x-homelab-index=2"
+      - "x-homelab-index=15"
       - "x-homelab-name=portainer"
       - "x-homelab-web-url={{ .base_url }}"
       - "x-homelab-icon=https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Portainer/icon.png"

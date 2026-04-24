@@ -8,7 +8,7 @@ services:
       - 3001:1337
     labels:
       - "x-homelab=true"
-      - "x-homelab-index=5"
+      - "x-homelab-index=30"
       - "x-homelab-name=Planka"
       - "x-homelab-web-url={{ .base_url }}"
       - "x-homelab-icon=https://planka.app/assets/PLANKA_enterprisey_glyph_white_duo_inverse_256-C1dEXeKQ.png"

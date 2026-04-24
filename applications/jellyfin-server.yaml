@@ -16,7 +16,7 @@ services:
     image: jellyfin/jellyfin
     labels:
       - "x-homelab=true"
-      - "x-homelab-index=1"
+      - "x-homelab-index=10"
       - "x-homelab-name=jellyfin"
       - "x-homelab-web-url={{ .base_url }}"
       - "x-homelab-icon=https://play-lh.googleusercontent.com/FAlWhVMAjAzI6Nxc7bf4KPgjbwA3GT9j2bzeAMnRpdWim_2SXnS9i4zhwasKWIC8PV4=w240-h480"

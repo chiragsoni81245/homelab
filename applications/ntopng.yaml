@@ -1,0 +1,46 @@
+services:
+
+  ntopng:
+    image: ntop/ntopng:stable
+    container_name: ntopng
+    restart: unless-stopped
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    volumes:
+      - {{ .config_file }}:/etc/ntopng/ntopng.conf:ro
+      - {{ .data_dir }}/ntopng:/var/lib/ntopng
+    environment:
+      - TZ=${TZ}
+    depends_on:
+      - redis
+    command: /etc/ntopng/ntopng.conf
+    deploy:
+      resources:
+        limits:
+          memory: 2g
+        reservations:
+          memory: 512m
+    labels:
+      - "x-homelab=true"
+      - "x-homelab-index=5"
+      - "x-homelab-name=ntopng"
+      - "x-homelab-web-url={{ .base_url }}"
+      - "x-homelab-icon=https://altnix.com/_next/static/media/ntop.fda4e289.jpg"
+  
+  redis:
+    image: redis:7-alpine
+    container_name: ntopng-redis
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - {{ .redis_config_file }}:/usr/local/etc/redis/redis.conf:ro
+      - {{ .data_dir }}/redis:/data
+    command: redis-server /usr/local/etc/redis/redis.conf
+    deploy:
+      resources:
+        limits:
+          memory: 512m
+        reservations:
+          memory: 128m

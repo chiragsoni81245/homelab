@@ -17,7 +17,7 @@ services:
 
     labels:
       - "x-homelab=true"
-      - "x-homelab-index=0"
+      - "x-homelab-index=1"
       - "x-homelab-name=Proxy Manager"
       - "x-homelab-web-url={{ .base_url }}"
       - "x-homelab-icon=https://nginxproxymanager.com/logo.svg"

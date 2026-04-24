@@ -20,7 +20,7 @@ services:
     {{ end }}
     labels:
       - "x-homelab=true"
-      - "x-homelab-index=4"
+      - "x-homelab-index=25"
       - "x-homelab-name=nvim"
       - "x-homelab-web-url={{ .base_url }}"
       - "x-homelab-icon=https://avatars.githubusercontent.com/u/6471485"
