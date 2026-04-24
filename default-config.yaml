@@ -49,9 +49,9 @@ applications:
   ntopng:
     enable: true
     base_url: "http://192.168.0.160:9090"
-    config_file: "/DATA/AppData/config/ntopng.conf"
-    redis_config_file: "/DATA/AppData/config/redis.conf"
-    data_dir: "/DATA/AppData/data"
+    config_file: "/DATA/AppData/ntopng/config/ntopng.conf"
+    redis_config_file: "/DATA/AppData/ntopng/config/redis.conf"
+    data_dir: "/DATA/AppData/ntopng/data"
 
   jellyfin-server: 
     enable: true
