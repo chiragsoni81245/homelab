@@ -73,7 +73,7 @@ services:
   postgres:
     image: postgres:16-alpine
     restart: on-failure
-    container_name: planka_postgres
+    container_name: planka-postgres
     volumes:
       - db-data:/var/lib/postgresql/data
     environment:
