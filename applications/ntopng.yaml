@@ -12,7 +12,7 @@ services:
       - {{ .config_file }}:/etc/ntopng/ntopng.conf:ro
       - {{ .data_dir }}/ntopng:/var/lib/ntopng
     environment:
-      - TZ=${TZ}
+      - TZ={{ or (index . "timezone") "Asia/Kolkata" }}
     depends_on:
       - redis
     command: /etc/ntopng/ntopng.conf

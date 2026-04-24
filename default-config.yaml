@@ -52,6 +52,7 @@ applications:
     config_file: "/DATA/AppData/ntopng/config/ntopng.conf"
     redis_config_file: "/DATA/AppData/ntopng/config/redis.conf"
     data_dir: "/DATA/AppData/ntopng/data"
+    timezone: "Asia/Kolkata"
 
   jellyfin-server: 
     enable: true
