@@ -2,6 +2,7 @@ services:
   planka:
     image: ghcr.io/plankanban/planka:latest
     restart: on-failure
+    container_name: planka
     volumes:
       - data:/app/data
     ports:
@@ -72,6 +73,7 @@ services:
   postgres:
     image: postgres:16-alpine
     restart: on-failure
+    container_name: planka_postgres
     volumes:
       - db-data:/var/lib/postgresql/data
     environment:
