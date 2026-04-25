@@ -98,10 +98,15 @@ update_applications() {
 }
 
 recreate_applications() {
+    local application_name=$1
     update
 
     echo -e "${GREEN}[RECREATE]${NC} recreating applications based on $HOMELAB_CONFIG"
-    bash $HOME/.local/share/homelab/install/applications/manage --recreate
+    if [ "$application_name" == "" ]; then
+        bash $HOME/.local/share/homelab/install/applications/manage --recreate
+    else
+        bash $HOME/.local/share/homelab/install/applications/manage --recreate --application $application_name
+    fi
 }
 
 # ====== NVIM FUNCTIONS ======
@@ -148,7 +153,7 @@ case "$main_cmd" in
         case "$sub_cmd" in
             status) print_applications_status ;;
             update) update_applications "${1:-}" ;;
-            recreate) recreate_applications ;;
+            recreate) recreate_applications "${1:-}" ;;
             *) error "Unknown application subcommand: $sub_cmd" ;;
         esac
         ;;

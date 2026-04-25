@@ -16,14 +16,14 @@ _mytool_completions() {
     local application_sub="status update recreate"
 
     # Generate application update subcommands from filenames
-    local application_update_sub="all"
+    local application_list="all"
     local update_dir="$HOMELAB_DIR/applications/.current"
     if [[ -d "$update_dir" ]]; then
         for f in "$update_dir"/*.yaml; do
             [[ -f "$f" ]] || continue
             name=$(basename "$f")
             name="${name%.*}"
-            application_update_sub+=" $name"
+            application_list+=" $name"
         done
     fi
 
@@ -32,8 +32,8 @@ _mytool_completions() {
 
     case "${COMP_WORDS[1]}" in
         application)
-            if [[ "${COMP_WORDS[2]}" == "update" ]]; then
-                COMPREPLY=( $(compgen -W "$application_update_sub" -- "$cur") )
+            if [[ "${COMP_WORDS[2]}" == "update" || "${COMP_WORDS[2]}" == "recreate" ]]; then
+                COMPREPLY=( $(compgen -W "$application_list" -- "$cur") )
             else
                 COMPREPLY=( $(compgen -W "$application_sub" -- "$cur") )
             fi
