@@ -10,7 +10,8 @@ services:
     hostname: "metube"
     container_name: metube
     restart: unless-stopped
-    network: metube_net
+    networks: 
+      - metube_net
     ports:
       - "8089:8089"
     volumes:
