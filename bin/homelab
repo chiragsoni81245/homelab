@@ -113,7 +113,7 @@ down_applications() {
     local application_name=$1
     update
 
-    echo -e "${GREEN}[RECREATE]${NC} recreating applications based on $HOMELAB_CONFIG"
+    echo -e "${GREEN}[DOWN]${NC} destroying applications based on $HOMELAB_CONFIG"
     if [ "$application_name" == "" ]; then
         bash $HOME/.local/share/homelab/install/applications/manage --down
     else
