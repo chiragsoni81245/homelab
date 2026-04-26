@@ -1,12 +1,17 @@
 #!/bin/bash
 set -euo pipefail
 
+DOWN=false
 RECREATE=false
 APPLICATION_NAME="all"
 APPLICATION_FOUND="false"
 
 for arg in "$@"; do
   case "$arg" in
+    --down)
+      DOWN=true
+      shift || true
+      ;;
     --recreate)
       RECREATE=true
       shift || true
@@ -56,7 +61,9 @@ while read -r app enable_status; do
         APP_CONFIGURATIONS=$(yq -o json ".applications[\"$app\"]" "$HOMELAB_CONFIG")
         echo $APP_CONFIGURATIONS | tpl -f $compose_template > $compose_file
 
-        if [[ "$RECREATE" == true ]]; then
+        if [[ "$DOWN" == true ]]; then
+            sudo docker compose -f "$compose_file" down
+        elif [[ "$RECREATE" == true ]]; then
             sudo docker compose -f "$compose_file" down
             sudo docker compose -f "$compose_file" pull
             sudo docker compose -f "$compose_file" up -d

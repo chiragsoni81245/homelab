@@ -109,6 +109,18 @@ recreate_applications() {
     fi
 }
 
+down_applications() {
+    local application_name=$1
+    update
+
+    echo -e "${GREEN}[RECREATE]${NC} recreating applications based on $HOMELAB_CONFIG"
+    if [ "$application_name" == "" ]; then
+        bash $HOME/.local/share/homelab/install/applications/manage --down
+    else
+        bash $HOME/.local/share/homelab/install/applications/manage --down --application $application_name
+    fi
+}
+
 # ====== NVIM FUNCTIONS ======
 nvim_update_config() {
     if [[ ! -d "$NVIM_CONFIG_DIR/.git" ]]; then
@@ -154,6 +166,7 @@ case "$main_cmd" in
             status) print_applications_status ;;
             update) update_applications "${1:-}" ;;
             recreate) recreate_applications "${1:-}" ;;
+            down) down_applications "${1:-}" ;;
             *) error "Unknown application subcommand: $sub_cmd" ;;
         esac
         ;;
