@@ -31,8 +31,8 @@ services:
       - 'YTDL_OPTIONS={
         "writethumbnail": true,
         "parse_metadata": [
-          "video::(?P<meta_album>YouTube)",
-          "video::(?P<meta_album_artist>YouTube)"
+          ":(?P<meta_album>YouTube)",
+          ":(?P<meta_album_artist>YouTube)"
         ],
         "postprocessors": [
           {
