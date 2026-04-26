@@ -13,7 +13,7 @@ services:
     networks: 
       - metube_net
     ports:
-      - "8089:8089"
+      - "8089:8081"
     volumes:
       - {{ .data_dir }}:/data
       - {{ .temp_dir }}:/temp
