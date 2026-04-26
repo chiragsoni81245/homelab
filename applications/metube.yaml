@@ -30,6 +30,10 @@ services:
       # --- YTDLP options to add into every download
       - 'YTDL_OPTIONS={
         "writethumbnail": true,
+        "parse_metadata": [
+          "video::(?P<meta_album>YouTube)",
+          "video::(?P<meta_album_artist>YouTube)"
+        ],
         "postprocessors": [
           {
             "key": "FFmpegMetadata",
