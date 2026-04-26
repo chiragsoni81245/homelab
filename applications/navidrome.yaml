@@ -36,7 +36,8 @@ services:
   # Runs every hour, tags new/untagged files, fetches & embeds album art
   beets-auto:
     image: lscr.io/linuxserver/beets:latest
-    container_name: beets-auto
+    hostname: "navidrome-beets-auto"
+    container_name: navidrome-beets-auto
     environment:
       - PUID=1000
       - PGID=1000
