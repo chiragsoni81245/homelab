@@ -61,6 +61,12 @@ applications:
     cache_path: "/DATA/AppData/jellyfin/cache"
     media_path: "/DATA/Media"
 
+  navidrome:
+    enable: false
+    base_url: "http://192.168.0.160:4533"
+    data_dir: "/DATA/AppData/navidrome/data"
+    data_dir: "/DATA/Media/Music"
+
   portainer: 
     enable: true
     base_url: "http://192.168.0.160:9000"
