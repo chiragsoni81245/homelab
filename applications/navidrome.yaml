@@ -54,8 +54,8 @@ services:
         echo '========================================';
         while true; do
           echo \"[$(date)] Starting beet import...\";
-          beet import -q /music 2>&1 | tee -a /config/beet-import.log;
-          echo \"[$(date)] Import complete. Sleeping 1 hour...\";
+          beet import /music 2>&1 | tee -a /config/beet-import.log;
+          echo \"[$(date)] Import complete. Sleeping {{ .scan_schedule }}...\";
           sleep {{ .scan_schedule }};
         done
       "
