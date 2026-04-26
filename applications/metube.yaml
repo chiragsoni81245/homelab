@@ -42,7 +42,7 @@ services:
           }
         ],
         "postprocessor_args": {
-          "Metadata": ["-metadata", "album=YouTube", "-metadata", "album_artist=YouTube"]
+          "FFmpegMetadata": ["-metadata", "album=YouTube", "-metadata", "album_artist=YouTube"]
         }
       }'
 
