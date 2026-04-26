@@ -72,4 +72,4 @@ services:
       # - CLEAR_COMPLETED_AFTER=3600    # optional: auto-clear completed after 1 hour
  
       # --- Logging ---
-      - LOGLEVEL=INFO
+      - LOGLEVEL={{ .log_level }}
