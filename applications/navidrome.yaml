@@ -46,17 +46,5 @@ services:
       - {{ .beets_config_dir }}:/config
       - "{{ .music_dir }}:/music"     # Read-write — Beets writes tags
     entrypoint: /bin/bash
-    command: >
-      -c "
-        echo '========================================';
-        echo ' Beets Auto Tagger Started';
-        echo ' Scanning every hour for new music...';
-        echo '========================================';
-        while true; do
-          echo \"[$(date)] Starting beet import...\";
-          beet import /music 2>&1 | tee -a /config/beet-import.log;
-          echo \"[$(date)] Import complete. Sleeping {{ .scan_schedule }}...\";
-          sleep {{ .scan_schedule }};
-        done
-      "
+    command: /config/autotag.sh {{ .scan_schedule }}
     restart: unless-stopped
