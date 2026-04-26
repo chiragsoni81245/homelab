@@ -30,10 +30,6 @@ services:
       # --- YTDLP options to add into every download
       - 'YTDL_OPTIONS={
         "writethumbnail": true,
-        "parse_metadata": [
-          ":(?P<meta_album>YouTube)",
-          ":(?P<meta_album_artist>YouTube)"
-        ],
         "postprocessors": [
           {
             "key": "FFmpegMetadata",
@@ -44,7 +40,10 @@ services:
           {
             "key": "EmbedThumbnail"
           }
-        ]
+        ],
+        "postprocessor_args": {
+          "Metadata": ["-metadata", "album=YouTube", "-metadata", "album_artist=YouTube"]
+        }
       }'
 
       # --- User / permissions ---
