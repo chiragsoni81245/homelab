@@ -10,6 +10,7 @@ services:
     hostname: "metube"
     container_name: metube
     restart: unless-stopped
+    user: 1000:1000
     networks: 
       - metube_net
     ports:
