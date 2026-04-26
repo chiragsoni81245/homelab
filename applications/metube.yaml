@@ -1,0 +1,54 @@
+name: metube
+
+networks:
+  metube_net:
+    driver: bridge
+
+services:
+  metube:
+    image: ghcr.io/alexta69/metube
+    hostname: "metube"
+    container_name: metube
+    restart: unless-stopped
+    network: metube_net
+    ports:
+      - "8089:8089"
+    volumes:
+      - {{ .data_dir }}:/data
+      - {{ .temp_dir }}:/temp
+      - {{ .video_dir }}:/video
+      - {{ .audio_dir }}:/audio
+    labels:
+      - "x-homelab=true"
+      - "x-homelab-index=12"
+      - "x-homelab-name=metube"
+      - "x-homelab-web-url={{ .base_url }}"
+      - "x-homelab-icon=https://repository-images.githubusercontent.com/307260205/b6a8d716-9c7b-40ec-bc44-6422d8b741a0"
+    environment:
+      # - 'YTDL_OPTIONS={"writesubtitles": true, "subtitleslangs": ["en"], "updatetime": false, "writethumbnail": true}'
+
+      # --- User / permissions ---
+      - PUID=1000
+      - PGID=1000
+      - UMASK=022
+
+      # --- State Directory ---
+      - STATE_DIR=/data
+      - TEMP_DIR=/temp
+
+      # --- Download Directories ---
+      - DOWNLOAD_DIR=/video
+      - AUDIO_DOWNLOAD_DIR=/audio
+ 
+      # --- Theme ---
+      - DEFAULT_THEME=dark
+ 
+      # --- CORS (required for browser extensions) ---
+      - CORS_ALLOWED_ORIGINS=*
+ 
+      # --- Download behaviour ---
+      - MAX_CONCURRENT_DOWNLOADS=10
+      # - CLEAR_COMPLETED_AFTER=3600    # optional: auto-clear completed after 1 hour
+ 
+      # --- Logging ---
+      - LOGLEVEL=INFO

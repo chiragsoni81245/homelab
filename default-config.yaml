@@ -62,10 +62,18 @@ applications:
     media_path: "/DATA/Media"
 
   navidrome:
-    enable: false
+    enable: true
     base_url: "http://192.168.0.160:4533"
     data_dir: "/DATA/AppData/navidrome/data"
     data_dir: "/DATA/Media/Music"
+
+  metube:
+    enable: true
+    base_url: "http://192.168.0.160:8089"
+    data_dir: "/DATA/AppData/metube/data"
+    temp_dir: "/DATA/AppData/metube/temp"
+    video_dir: "/DATA/Media/Youtube"
+    audio_dir: "/DATA/Media/Music/Youtube"
 
   portainer: 
     enable: true
