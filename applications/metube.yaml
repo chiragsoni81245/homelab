@@ -26,7 +26,21 @@ services:
       - "x-homelab-web-url={{ .base_url }}"
       - "x-homelab-icon=https://repository-images.githubusercontent.com/307260205/b6a8d716-9c7b-40ec-bc44-6422d8b741a0"
     environment:
-      # - 'YTDL_OPTIONS={"writesubtitles": true, "subtitleslangs": ["en"], "updatetime": false, "writethumbnail": true}'
+      # --- YTDLP options to add into every download
+      - 'YTDL_OPTIONS={
+        "writethumbnail": true,
+        "postprocessors": [
+          {
+            "key": "FFmpegMetadata",
+            "add_metadata": true,
+            "add_chapters": true,
+            "add_infojson": "if_exists"
+          },
+          {
+            "key": "EmbedThumbnail"
+          }
+        ]
+      }'
 
       # --- User / permissions ---
       - PUID=1000
