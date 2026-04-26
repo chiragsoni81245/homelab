@@ -66,6 +66,8 @@ applications:
     base_url: "http://192.168.0.160:4533"
     data_dir: "/DATA/AppData/navidrome/data"
     data_dir: "/DATA/Media/Music"
+    beets_config_dir: "/DATA/AppData/navidrome/beets/config"
+    scan_schedule: "1h"
 
   metube:
     enable: true

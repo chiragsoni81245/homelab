@@ -18,8 +18,10 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      # Optional: put your config options customization here. Examples:
-      # ND_LOGLEVEL: debug
+      - ND_SCANSCHEDULE={{ .scan_schedule }}           # Auto-rescan every hour to pick up new tags
+      - ND_LOGLEVEL=info
+      - ND_SESSIONTIMEOUT=24h
+      - ND_ENABLETRANSCODINGCONFIG=true
     labels:
       - "x-homelab=true"
       - "x-homelab-index=11"
@@ -29,3 +31,31 @@ services:
     volumes:
       - "{{ .data_dir }}:/data"
       - "{{ .music_dir }}:/music:ro"
+  
+  # ─── Beets Auto Tagger ────────────────────────────────────
+  # Runs every hour, tags new/untagged files, fetches & embeds album art
+  beets-auto:
+    image: lscr.io/linuxserver/beets:latest
+    container_name: beets-auto
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Kolkata
+    volumes:
+      - {{ .beets_config_dir }}:/config
+      - "{{ .music_dir }}:/music"     # Read-write — Beets writes tags
+    entrypoint: /bin/bash
+    command: >
+      -c "
+        echo '========================================';
+        echo ' Beets Auto Tagger Started';
+        echo ' Scanning every hour for new music...';
+        echo '========================================';
+        while true; do
+          echo \"[$(date)] Starting beet import...\";
+          beet import -q /music 2>&1 | tee -a /config/beet-import.log;
+          echo \"[$(date)] Import complete. Sleeping 1 hour...\";
+          sleep {{ .scan_schedule }};
+        done
+      "
+    restart: unless-stopped
