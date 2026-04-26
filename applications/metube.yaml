@@ -46,6 +46,8 @@ services:
         }
       }'
 
+      - 'OUTPUT_TEMPLATE_PLAYLIST=%(playlist_title)s/%(playlist_index)s-%(title)s.%(ext)s'
+
       # --- User / permissions ---
       - PUID=1000
       - PGID=1000
