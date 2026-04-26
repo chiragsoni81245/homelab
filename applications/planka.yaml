@@ -1,3 +1,5 @@
+name: planka
+
 services:
   planka:
     image: ghcr.io/plankanban/planka:latest
