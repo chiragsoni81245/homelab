@@ -32,13 +32,13 @@ services:
       "ignoreerrors": true,
       "retries": 10,
       "fragment_retries": 10,
-      "writethumbnail": true,
+      "concurrent_fragments": 4,
+      "sponsorblock_remove": ["sponsor"],
       "postprocessors": [
         {
           "key": "FFmpegMetadata",
           "add_metadata": true,
-          "add_chapters": true,
-          "add_infojson": "if_exists"
+          "add_chapters": true
         },
         {
           "key": "EmbedThumbnail",
@@ -72,6 +72,7 @@ services:
 
     # --- Download behaviour ---
     - MAX_CONCURRENT_DOWNLOADS={{ .max_concurrent_downloads }}
+    - CLEAR_COMPLETED_AFTER=3600
 
     # --- Logging ---
     - LOGLEVEL={{ .log_level }}
