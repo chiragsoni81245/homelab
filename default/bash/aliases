@@ -1,1 +1,2 @@
 # File system
+alias ls="ls -lh"
