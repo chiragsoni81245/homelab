@@ -27,49 +27,51 @@ services:
       - "x-homelab-web-url={{ .base_url }}"
       - "x-homelab-icon=https://repository-images.githubusercontent.com/307260205/b6a8d716-9c7b-40ec-bc44-6422d8b741a0"
     environment:
-      # --- YTDLP options to add into every download
-      - 'YTDL_OPTIONS={
-        "writethumbnail": true,
-        "postprocessors": [
-          {
-            "key": "FFmpegMetadata",
-            "add_metadata": true,
-            "add_chapters": true,
-            "add_infojson": "if_exists"
-          },
-          {
-            "key": "EmbedThumbnail"
-          }
-        ],
-        "postprocessor_args": {
-          "metadata": ["-metadata", "album=YouTube", "-metadata", "album_artist=YouTube"]
+    # --- YTDLP options ---
+    - 'YTDL_OPTIONS={
+      "ignoreerrors": true,
+      "retries": 10,
+      "fragment_retries": 10,
+      "writethumbnail": true,
+      "postprocessors": [
+        {
+          "key": "FFmpegMetadata",
+          "add_metadata": true,
+          "add_chapters": true,
+          "add_infojson": "if_exists"
+        },
+        {
+          "key": "EmbedThumbnail",
+          "already_have_thumbnail": false
         }
-      }'
+      ]
+    }'
 
-      - 'OUTPUT_TEMPLATE_PLAYLIST=%(playlist_title)s/%(playlist_index)s-%(title)s.%(ext)s'
+    # --- Output templates ---
+    - 'OUTPUT_TEMPLATE=%(title)s.%(ext)s'
+    - 'OUTPUT_TEMPLATE_PLAYLIST=%(playlist_title)s/%(playlist_index)s-%(title)s.%(ext)s'
 
-      # --- User / permissions ---
-      - PUID=1000
-      - PGID=1000
-      - UMASK=022
+    # --- User / permissions ---
+    - PUID=1000
+    - PGID=1000
+    - UMASK=022
 
-      # --- State Directory ---
-      - STATE_DIR=/data
-      - TEMP_DIR=/temp
+    # --- State Directory ---
+    - STATE_DIR=/data
+    - TEMP_DIR=/temp
 
-      # --- Download Directories ---
-      - DOWNLOAD_DIR=/video
-      - AUDIO_DOWNLOAD_DIR=/audio
- 
-      # --- Theme ---
-      - DEFAULT_THEME=dark
- 
-      # --- CORS (required for browser extensions) ---
-      - CORS_ALLOWED_ORIGINS=*
- 
-      # --- Download behaviour ---
-      - MAX_CONCURRENT_DOWNLOADS={{ .max_concurrent_downloads }}
-      # - CLEAR_COMPLETED_AFTER=3600    # optional: auto-clear completed after 1 hour
- 
-      # --- Logging ---
-      - LOGLEVEL={{ .log_level }}
+    # --- Download Directories ---
+    - DOWNLOAD_DIR=/video
+    - AUDIO_DOWNLOAD_DIR=/audio
+
+    # --- Theme ---
+    - DEFAULT_THEME=dark
+
+    # --- CORS (required for browser extensions) ---
+    - CORS_ALLOWED_ORIGINS=*
+
+    # --- Download behaviour ---
+    - MAX_CONCURRENT_DOWNLOADS={{ .max_concurrent_downloads }}
+
+    # --- Logging ---
+    - LOGLEVEL={{ .log_level }}
