@@ -29,10 +29,10 @@ services:
     environment:
     # --- YTDLP options ---
     - 'YTDL_OPTIONS={
-      "ignoreerrors": true,
-      "retries": 10,
-      "fragment_retries": 10,
-      "concurrent_fragments": 4,
+      "writethumbnail": true,
+      "writeautomaticsub": true,
+      "subtitleslangs": ["en", "en-orig"],
+      "subtitlesformat": "srt",
       "sponsorblock_remove": ["sponsor"],
       "postprocessors": [
         {
