@@ -72,6 +72,7 @@ applications:
   metube:
     enable: true
     base_url: "http://192.168.0.160:8089"
+    config_dir: "/DATA/AppData/metube/config" 
     data_dir: "/DATA/AppData/metube/data"
     temp_dir: "/DATA/AppData/metube/temp"
     video_dir: "/DATA/Media/Youtube"

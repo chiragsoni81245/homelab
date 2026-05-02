@@ -20,6 +20,7 @@ services:
       - {{ .temp_dir }}:/temp
       - {{ .video_dir }}:/video
       - {{ .audio_dir }}:/audio
+      - {{ .config_dir }}/presets.json:/presets.json:ro
     labels:
       - "x-homelab=true"
       - "x-homelab-index=12"
@@ -29,23 +30,15 @@ services:
     environment:
     # --- YTDLP options ---
     - 'YTDL_OPTIONS={
-      "writethumbnail": true,
-      "writeautomaticsub": true,
-      "subtitleslangs": ["en", "en-orig"],
-      "subtitlesformat": "srt",
-      "sponsorblock_remove": ["sponsor"],
-      "postprocessors": [
-        {
-          "key": "FFmpegMetadata",
-          "add_metadata": true,
-          "add_chapters": true
-        },
-        {
-          "key": "EmbedThumbnail",
-          "already_have_thumbnail": false
-        }
-      ]
+      "ignoreerrors": true,
+      "retries": 10,
+      "fragment_retries": 10,
+      "concurrent_fragments": 4,
+      "sponsorblock_remove": ["sponsor"]
     }'
+
+    # --- Presets ---
+    - YTDL_OPTIONS_PRESETS_FILE=/presets.json
 
     # --- Output templates ---
     - 'OUTPUT_TEMPLATE=%(title)s.%(ext)s'
