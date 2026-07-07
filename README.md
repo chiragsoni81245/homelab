@@ -1,4 +1,4 @@
 # homelab
 Turn a fresh Ubuntu Server installation into a homelab
 
-<img width="1853" height="897" alt="Screenshot from 2025-08-19 03-26-03" src="https://github.com/user-attachments/assets/f22caa02-2ede-4588-9e63-215fe3e1b7e5" />
+<img width="1662" height="1035" alt="Screenshot 2026-07-08 at 12 47 25 AM" src="https://github.com/user-attachments/assets/53278ce7-c389-4904-8cf2-ef735a96cdb1" />
