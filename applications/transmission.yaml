@@ -12,8 +12,10 @@ services:
       - PEERPORT=51413
       - PGID=1000
       - PUID=1000
+      {{ if and .username .password }}
       - USER={{ .username }}
       - PASS={{ .password }}
+      {{ end }}
       - TZ=Asia/Kolkata
     image: linuxserver/transmission:4.0.4
     labels:
