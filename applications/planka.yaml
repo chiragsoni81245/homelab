@@ -14,7 +14,7 @@ services:
       - "x-homelab-index=30"
       - "x-homelab-name=Planka"
       - "x-homelab-web-url={{ .base_url }}"
-      - "x-homelab-icon=https://planka.app/assets/PLANKA_enterprisey_glyph_white_duo_inverse_256-C1dEXeKQ.png"
+      - "x-homelab-icon=https://planka.app/assets/marketing/glyphs/PLANKA_enterprisey_glyph_white_duo_inverse_256.png"
     environment:
       - SECRET_KEY={{ .secret_key }}
       - DATABASE_URL=postgresql://postgres@postgres/planka
